@@ -4,7 +4,7 @@
 // Portrait/multi-shot layouts + transitions arrive in D1/D2. Owns preview/* only.
 
 import { usePortfolio } from '../../app/PortfolioProvider'
-import { BrowserFrame } from './BrowserFrame'
+import { ShotGroup } from './ShotGroup'
 import styles from './Preview.module.css'
 
 export function Preview() {
@@ -12,14 +12,15 @@ export function Preview() {
   const project = projects[activeIndex]
   if (!project) return null
 
-  const shot = project.screenshots[0]
-
   return (
     <section className={styles.preview} aria-label="Selected project">
       <div className={styles.stage}>
-        <div className={styles.group}>
-          <BrowserFrame theme={project.theme} shot={shot} label={project.name} />
-        </div>
+        <ShotGroup
+          orientation={project.orientation}
+          theme={project.theme}
+          screenshots={project.screenshots}
+          label={project.name}
+        />
       </div>
 
       <div className={styles.caption}>

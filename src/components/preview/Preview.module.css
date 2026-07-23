@@ -19,14 +19,6 @@
   min-height: 0;
 }
 
-/* Width cap so the frame breathes — never edge-to-edge (OVERVIEW §4). */
-.group {
-  width: min(100%, 720px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 /* ---- Caption block ---- */
 .caption {
   width: min(100%, 720px);

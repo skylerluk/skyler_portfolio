@@ -1,0 +1,64 @@
+/* Arranges frames on the --paper surface with air preserved. Total width is
+ * capped so multi-shot groups still breathe (never edge-to-edge). */
+
+.group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+/* Landscape frames are width-driven; portrait phones are height-driven. */
+.landscape.single {
+  max-width: 720px;
+}
+
+.landscape.multi {
+  max-width: 760px;
+  align-items: flex-start;
+}
+
+/* Two landscape frames share the row, scaled down to keep whitespace. */
+.landscape.multi > * {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.portrait {
+  gap: var(--space-5);
+}
+
+/* Portrait side-by-side pair sits centered, primary emphasized via PhoneFrame. */
+.portrait.multi {
+  align-items: center;
+}
+
+/* On narrow screens, groups stack / reduce to the primary; keep them uncramped. */
+@media (max-width: 860px) {
+  .group {
+    gap: var(--space-4);
+  }
+
+  .landscape.multi {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .landscape.multi > * {
+    width: min(100%, 520px);
+    flex: none;
+  }
+
+  /* Two phones can stay side-by-side on tablet widths but shrink the gap. */
+  .portrait.multi {
+    gap: var(--space-3);
+  }
+}
+
+/* Very narrow: portrait groups collapse to the primary shot, the rest below. */
+@media (max-width: 560px) {
+  .portrait.multi {
+    flex-direction: column;
+  }
+}
