@@ -5,15 +5,25 @@
 
 import { usePortfolio } from '../../app/PortfolioProvider'
 import { ShotGroup } from './ShotGroup'
+import { useHashSync, useNeighborPreload } from './usePreviewSync'
 import styles from './Preview.module.css'
 
 export function Preview() {
-  const { projects, activeIndex } = usePortfolio()
+  const { projects, activeIndex, setActiveIndex } = usePortfolio()
+
+  // Deep-linking (#sailor …) and neighbour preloading — preview-owned effects.
+  useHashSync({ projects, activeIndex, setActiveIndex })
+  useNeighborPreload({ projects, activeIndex })
+
   const project = projects[activeIndex]
   if (!project) return null
 
   return (
-    <section className={styles.preview} aria-label="Selected project">
+    <section
+      className={styles.preview}
+      role="region"
+      aria-label="Selected project"
+    >
       {/* key={project.id} restarts the enter animation on every change; a
           consistent flex layout keeps height stable so there's no jump. */}
       <div className={styles.fade} key={project.id}>
