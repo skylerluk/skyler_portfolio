@@ -1,19 +1,21 @@
 // Track C — the production rail. Owns src/components/rail/* only.
 // C0: square logo tiles, active/hover/focus states, click selection.
-// Refs on the <ul> and each tile are kept so C1's scroll engine can center
-// the active tile and attach listeners. Consumes shared state via
-// usePortfolio(); never edits App.tsx / Layout / tokens.
+// C1: wheel-driven scroll engine + keyboard nav via useRailScroll.
+// Consumes shared state via usePortfolio(); never edits App.tsx / Layout / tokens.
 
 import { useRef } from 'react'
 import { usePortfolio } from '../../app/PortfolioProvider'
+import { useRailScroll } from './useRailScroll'
 import styles from './Rail.module.css'
 
 export function Rail() {
   const { projects, activeIndex, setActiveIndex } = usePortfolio()
 
-  // Refs the scroll engine (C1) will use to center the active tile in view.
+  // Refs the scroll engine uses to center the active tile in view.
   const listRef = useRef<HTMLUListElement>(null)
   const tileRefs = useRef<(HTMLButtonElement | null)[]>([])
+
+  useRailScroll({ listRef, tileRefs })
 
   return (
     <nav aria-label="Projects" className={styles.nav}>
