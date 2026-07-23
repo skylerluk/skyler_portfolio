@@ -1,0 +1,110 @@
+/* Landscape browser-window frame. Separation from the --paper surface is by
+ * shadow only. Chrome switches light/dark per project theme; the surrounding
+ * pane always stays paper (owned by Preview.module.css). */
+
+.frame {
+  margin: 0;
+  width: 100%;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-window);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chrome variants — only the window's own chrome changes, never the pane. */
+.light {
+  background: #fbfbf9;
+  border: 1px solid var(--hair);
+}
+
+.dark {
+  background: #1c1b1f;
+  border: 1px solid #2c2a30;
+}
+
+/* Top bar with the three traffic-light dots. */
+.bar {
+  height: 34px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 0 var(--space-4);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.light .dot {
+  background: var(--hair);
+}
+
+.dark .dot {
+  background: #3a383f;
+}
+
+/* Body holds the screenshot at a stable landscape ratio (no layout shift). */
+.body {
+  aspect-ratio: 16 / 10;
+  position: relative;
+  overflow: hidden;
+}
+
+.light .body {
+  background: var(--panel);
+}
+
+.dark .body {
+  background: #141317;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+/* Intentional "coming soon" state — never a broken <img>. */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.placeholderName {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--ink-2);
+}
+
+.dark .placeholderName {
+  color: #e8e6ee;
+}
+
+.placeholderLabel {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* A supporting frame in a multi-shot group sits a touch smaller/back (D1). */
+.supporting {
+  transform: scale(0.92);
+  transform-origin: center;
+}

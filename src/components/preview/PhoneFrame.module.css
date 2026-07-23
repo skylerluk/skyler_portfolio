@@ -1,0 +1,81 @@
+/* Portrait phone frame. Height-driven so a side-by-side pair stays balanced;
+ * separation is by --shadow-phone only. Dark chrome fits Sailor's mobile app. */
+
+.phone {
+  margin: 0;
+  height: min(56vh, 520px);
+  aspect-ratio: 9 / 19.5;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #1c1b1f;
+  border: 1px solid #2c2a30;
+  box-shadow: var(--shadow-phone);
+  display: flex;
+  flex-direction: column;
+  flex: none;
+}
+
+/* Slim status bar with a centered notch. */
+.bar {
+  height: 26px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.notch {
+  width: 36%;
+  height: 8px;
+  border-radius: 999px;
+  background: #000;
+}
+
+.body {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #141317;
+}
+
+.img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  text-align: center;
+  padding: var(--space-4);
+}
+
+.placeholderName {
+  font-family: var(--font-serif);
+  font-size: 0.9375rem;
+  color: #e8e6ee;
+}
+
+.placeholderLabel {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Secondary phone in a group: slightly smaller so the primary reads foremost. */
+.supporting {
+  height: min(48vh, 448px);
+  align-self: center;
+}
