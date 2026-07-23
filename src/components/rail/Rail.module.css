@@ -1,10 +1,33 @@
+/* Track C rail. Tokens only — never hardcode a hex that duplicates a token. */
+
+/* The nav centers the tile column within A's 220px lane so it floats mid-page. */
+.nav {
+  display: flex;
+  justify-content: center;
+  /* Cap the rail to the lane height; long lists scroll internally with the
+     active tile kept centered (C1). Focus rings must not clip — hence the
+     padding, and overflow only on the scroll axis. */
+  max-height: 100vh;
+  max-height: 100dvh;
+}
+
 .rail {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-3);
   list-style: none;
-  padding: 0;
+  padding: var(--space-2);
   margin: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Hidden scrollbar — the surface stays seamless. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.rail::-webkit-scrollbar {
+  display: none;
 }
 
 .tile {
@@ -18,14 +41,29 @@
   justify-content: center;
   cursor: pointer;
   padding: 0;
+  overflow: hidden;
   opacity: 0.5;
   transition:
     opacity 0.15s ease,
     border-color 0.15s ease,
     box-shadow 0.15s ease;
+}
+
+/* Real square logo (Track E): contain within the tile, small breathing room. */
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  display: block;
+}
+
+/* Monogram fallback until a logo exists. */
+.monogram {
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: 1.125rem;
+  line-height: 1;
   color: var(--ink);
 }
 
@@ -44,8 +82,26 @@
   outline-offset: 2px;
 }
 
+/* Mobile (≤860px): A's grid turns the rail into a horizontal strip.
+   Horizontal scroll, comfortable tap targets, momentum, hidden scrollbar. */
 @media (max-width: 860px) {
+  .nav {
+    max-height: none;
+    width: 100%;
+  }
+
   .rail {
     flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    /* ≥44px hit area even though the tile visual stays 46px. */
+    padding: var(--space-3);
+  }
+
+  .tile {
+    scroll-snap-align: center;
+    flex: 0 0 auto;
   }
 }
