@@ -2,6 +2,7 @@
 // contact links. Reads only from siteConfig; no hardcoded content. Owns components/about/*.
 
 import { siteConfig } from '../../data'
+import { GithubTracker } from './GithubTracker'
 import styles from './About.module.css'
 
 export function About() {
@@ -19,8 +20,9 @@ export function About() {
         Currently — building <strong>{siteConfig.currentlyBuilding}</strong>
       </p>
 
-      {/* B1 mounts <GithubTracker/> here */}
-      <div className={styles.trackerSlot} />
+      <div className={styles.trackerSlot}>
+        <GithubTracker />
+      </div>
 
       <ul className={styles.links}>
         {siteConfig.links.map((link) => {
