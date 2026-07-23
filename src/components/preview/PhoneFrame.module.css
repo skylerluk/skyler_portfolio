@@ -15,22 +15,6 @@
   flex: none;
 }
 
-/* Slim status bar with a centered notch. */
-.bar {
-  height: 26px;
-  flex: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.notch {
-  width: 36%;
-  height: 8px;
-  border-radius: 999px;
-  background: #000;
-}
-
 .body {
   flex: 1;
   position: relative;

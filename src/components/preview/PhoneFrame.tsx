@@ -29,9 +29,6 @@ export function PhoneFrame({
     <figure
       className={`${styles.phone} ${supporting ? styles.supporting : ''}`}
     >
-      <div className={styles.bar}>
-        <span className={styles.notch} />
-      </div>
       <div className={styles.body}>
         {hasImage ? (
           <img
