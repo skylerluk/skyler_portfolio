@@ -3,6 +3,7 @@
 // tasteful placeholder (never a broken <img>). Primary vs. supporting sizing is
 // handled by the ShotGroup layout via the `supporting` flag.
 
+import { useEffect, useState } from 'react'
 import type { Screenshot } from '../../data/types'
 import styles from './PhoneFrame.module.css'
 
@@ -14,8 +15,15 @@ interface PhoneFrameProps {
   supporting?: boolean
 }
 
-export function PhoneFrame({ shot, label, supporting = false }: PhoneFrameProps) {
-  const hasImage = Boolean(shot?.src)
+export function PhoneFrame({
+  shot,
+  label,
+  supporting = false,
+}: PhoneFrameProps) {
+  // Fall back to placeholder if a real image fails to load. Reset on src change.
+  const [errored, setErrored] = useState(false)
+  useEffect(() => setErrored(false), [shot?.src])
+  const hasImage = Boolean(shot?.src) && !errored
 
   return (
     <figure
@@ -32,11 +40,14 @@ export function PhoneFrame({ shot, label, supporting = false }: PhoneFrameProps)
             alt={shot!.alt}
             loading="lazy"
             decoding="async"
+            onError={() => setErrored(true)}
           />
         ) : (
           <div className={styles.placeholder}>
             <span className={styles.placeholderName}>{label}</span>
-            <span className={styles.placeholderLabel}>screenshot placeholder</span>
+            <span className={styles.placeholderLabel}>
+              screenshot placeholder
+            </span>
           </div>
         )}
       </div>

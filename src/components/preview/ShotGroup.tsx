@@ -33,7 +33,8 @@ export function ShotGroup({
   // Derive the slots to render. Zero shots → a single placeholder frame so the
   // empty state still looks intentional; never render a broken image.
   const shots = screenshots.slice(0, MAX_SHOTS)
-  const slots: (Screenshot | undefined)[] = shots.length > 0 ? shots : [undefined]
+  const slots: (Screenshot | undefined)[] =
+    shots.length > 0 ? shots : [undefined]
 
   const groupClass = `${styles.group} ${
     orientation === 'portrait' ? styles.portrait : styles.landscape
@@ -43,12 +44,7 @@ export function ShotGroup({
     <div className={groupClass} data-count={slots.length}>
       {slots.map((shot, i) =>
         orientation === 'portrait' ? (
-          <PhoneFrame
-            key={i}
-            shot={shot}
-            label={label}
-            supporting={i > 0}
-          />
+          <PhoneFrame key={i} shot={shot} label={label} supporting={i > 0} />
         ) : (
           <BrowserFrame
             key={i}
