@@ -8,9 +8,15 @@
 .name {
   font-family: var(--font-serif);
   font-weight: 300;
-  font-size: 2rem;
+  font-size: 1.375rem;
   line-height: 1.05;
+  letter-spacing: -0.01em;
   color: var(--ink);
+}
+
+/* Small accent period after the wordmark */
+.period {
+  color: var(--accent);
 }
 
 .role {
@@ -30,6 +36,9 @@
 }
 
 .building {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
   font-size: 0.875rem;
   color: var(--ink-2);
 }
@@ -39,24 +48,42 @@
   color: var(--ink);
 }
 
-/* Placeholder box for the Track B GitHub tracker */
+/* Pulsing accent dot — degrades to a static dot under prefers-reduced-motion
+   (global safety net kills the animation). */
+.pulse {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 var(--accent-soft);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+}
+
+/* Slot B1 mounts the GithubTracker into. Reserves height so the layout is
+   stable before the tracker renders. */
 .trackerSlot {
-  border: 1px dashed var(--hair);
-  border-radius: var(--radius-md);
-  padding: var(--space-5) var(--space-4);
-  color: var(--muted);
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  text-align: center;
-  background: var(--panel);
+  min-height: 96px;
 }
 
 .links {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-3);
+  gap: var(--space-4);
   list-style: none;
   margin-top: auto;
+  padding: 0;
 }
 
 .link {
@@ -69,6 +96,21 @@
   color: var(--accent);
 }
 
+.link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.arrow {
+  color: var(--muted);
+}
+
+.link:hover .arrow {
+  color: var(--accent);
+}
+
 .linkPending {
   color: var(--muted);
+  cursor: default;
 }
