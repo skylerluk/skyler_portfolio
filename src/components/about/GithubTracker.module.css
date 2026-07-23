@@ -1,0 +1,119 @@
+/*
+ * Heatmap level tints. Local to this module by design — B1 must not edit the global
+ * tokens file. NOTE (for reviewer): if these accent tints should become shared design
+ * tokens, they belong in styles/tokens.css; left local here per the B1 contract.
+ *   0 -> --panel, 4 -> --accent (tokens); 1..3 are intermediate violet tints.
+ */
+.tracker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.label {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.total {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex: none;
+  animation: livePulse 2s ease-in-out infinite;
+}
+
+@keyframes livePulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* Heatmap: 7 rows (days), columns flow horizontally (weeks) */
+.grid {
+  display: grid;
+  grid-template-rows: repeat(7, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 3px;
+  width: 100%;
+}
+
+.cell {
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background: var(--panel);
+}
+
+.level0 {
+  background: var(--panel);
+}
+.level1 {
+  background: #e7deff;
+}
+.level2 {
+  background: #c9bbff;
+}
+.level3 {
+  background: #9e82ff;
+}
+.level4 {
+  background: var(--accent);
+}
+
+/* Loading skeleton — calm muted cells, no spinner */
+.skeleton {
+  background: var(--panel);
+  opacity: 0.6;
+}
+
+/* Ticker: one truncated line */
+.ticker {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.ticker .rel {
+  color: var(--muted);
+}
+
+/* Honest fallback line */
+.fallback {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+}
+
+.fallback a:hover {
+  color: var(--accent);
+}

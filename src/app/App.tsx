@@ -2,10 +2,9 @@
 // they replace the internals of their own component folder only (see OVERVIEW §5).
 
 import { PortfolioProvider } from './PortfolioProvider'
-import { About } from '../components/about'
+import { About, SiteMeta } from '../components/about'
 import { Rail } from '../components/rail'
 import { Preview } from '../components/preview'
-import { siteConfig } from '../data'
 import styles from './Layout.module.css'
 
 function App() {
@@ -21,11 +20,9 @@ function App() {
         <section className={styles.preview}>
           <Preview />
         </section>
-        {/* Meta/footer slot — Track B (B2) refines this content. */}
+        {/* Meta/footer slot — content provided by Track B's <SiteMeta/> (B2). */}
         <footer className={styles.footer}>
-          <span className="label">
-            {siteConfig.location} · {siteConfig.coords}
-          </span>
+          <SiteMeta />
         </footer>
       </div>
     </PortfolioProvider>
