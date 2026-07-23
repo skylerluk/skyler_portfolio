@@ -1,8 +1,10 @@
-// STUB (Track A/A3). Internals owned by Track D; replace within this folder only.
-// Renders a placeholder frame (sized by orientation) + caption from data. Track D
-// builds real screenshot frames + per-project chrome. No hardcoded content.
+// Track D — Preview. Reads the active project from usePortfolio() and renders it
+// on the seamless --paper surface: a browser frame holding the first screenshot
+// (or a tasteful placeholder), lifted by shadow only, plus the caption block.
+// Portrait/multi-shot layouts + transitions arrive in D1/D2. Owns preview/* only.
 
 import { usePortfolio } from '../../app/PortfolioProvider'
+import { BrowserFrame } from './BrowserFrame'
 import styles from './Preview.module.css'
 
 export function Preview() {
@@ -10,14 +12,13 @@ export function Preview() {
   const project = projects[activeIndex]
   if (!project) return null
 
-  const frameClass =
-    project.orientation === 'portrait' ? styles.portrait : styles.landscape
+  const shot = project.screenshots[0]
 
   return (
-    <div className={styles.preview}>
+    <section className={styles.preview} aria-label="Selected project">
       <div className={styles.stage}>
-        <div className={`${styles.frame} ${frameClass}`}>
-          screenshot placeholder
+        <div className={styles.group}>
+          <BrowserFrame theme={project.theme} shot={shot} label={project.name} />
         </div>
       </div>
 
@@ -39,13 +40,15 @@ export function Preview() {
           {project.contentComplete ? project.oneLiner : 'Details coming soon.'}
         </p>
 
-        <div className={styles.chips}>
-          {project.stack.map((tech) => (
-            <span key={tech} className={styles.chip}>
-              {tech}
-            </span>
-          ))}
-        </div>
+        {project.stack.length > 0 && (
+          <div className={styles.chips}>
+            {project.stack.map((tech) => (
+              <span key={tech} className={styles.chip}>
+                {tech}
+              </span>
+            ))}
+          </div>
+        )}
 
         {project.link && (
           <a
@@ -58,6 +61,6 @@ export function Preview() {
           </a>
         )}
       </div>
-    </div>
+    </section>
   )
 }
