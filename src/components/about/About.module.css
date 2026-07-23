@@ -1,0 +1,74 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  height: 100%;
+}
+
+.name {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: 2rem;
+  line-height: 1.05;
+  color: var(--ink);
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.bio {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--ink-2);
+  max-width: 34ch;
+}
+
+.building {
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+
+.building strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* Placeholder box for the Track B GitHub tracker */
+.trackerSlot {
+  border: 1px dashed var(--hair);
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-4);
+  color: var(--muted);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  text-align: center;
+  background: var(--panel);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  list-style: none;
+  margin-top: auto;
+}
+
+.link {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-2);
+}
+
+.link:hover {
+  color: var(--accent);
+}
+
+.linkPending {
+  color: var(--muted);
+}

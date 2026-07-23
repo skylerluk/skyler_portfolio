@@ -1,0 +1,74 @@
+/*
+ * The 3-zone grid on one seamless --paper surface (no borders between zones).
+ * About (300) · Rail (220) · Preview (1fr), full viewport height, with a thin
+ * meta/footer row spanning the bottom. Track B (B2) fills the footer content.
+ * Structure only — feature tracks refine their own internals.
+ */
+
+.shell {
+  min-height: 100vh;
+  background: var(--paper);
+  display: grid;
+  grid-template-columns: 300px 220px 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    'about rail preview'
+    'footer footer footer';
+}
+
+.about {
+  grid-area: about;
+  padding: var(--space-7) var(--space-6);
+  min-width: 0;
+}
+
+.rail {
+  grid-area: rail;
+  /* Tile floats centered within its column (OVERVIEW §4) */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+}
+
+.preview {
+  grid-area: preview;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  grid-area: footer;
+  padding: var(--space-4) var(--space-6);
+  /* Labeled slot — Track B (B2) fills real meta content here. */
+}
+
+/* ---- Responsive: stack to a single column below ~860px ---- */
+@media (max-width: 860px) {
+  .shell {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      'about'
+      'rail'
+      'preview'
+      'footer';
+  }
+
+  .about {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  .rail {
+    /* Rail becomes a horizontal strip on mobile (C refines internals) */
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: var(--space-3) var(--space-5);
+  }
+
+  .preview {
+    padding: var(--space-5);
+  }
+}
