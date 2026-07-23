@@ -29,9 +29,17 @@
   gap: var(--space-5);
 }
 
-/* Portrait side-by-side pair sits centered, primary emphasized via PhoneFrame. */
+/* Portrait side-by-side: all shots the same size, sharing the row evenly.
+ * Width-driven (flex) so 2–3 phones always fit; aspect-ratio sets the height. */
 .portrait.multi {
   align-items: center;
+}
+
+.portrait.multi > * {
+  flex: 1 1 0;
+  min-width: 0;
+  height: auto;
+  max-width: 232px;
 }
 
 /* On narrow screens, groups stack / reduce to the primary; keep them uncramped. */
@@ -56,9 +64,15 @@
   }
 }
 
-/* Very narrow: portrait groups collapse to the primary shot, the rest below. */
+/* Very narrow: portrait groups stack; each phone at a natural, equal width. */
 @media (max-width: 560px) {
   .portrait.multi {
     flex-direction: column;
+  }
+
+  .portrait.multi > * {
+    flex: none;
+    width: min(72vw, 300px);
+    max-width: none;
   }
 }
