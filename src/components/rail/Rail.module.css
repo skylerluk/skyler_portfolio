@@ -1,6 +1,15 @@
+/* Track C rail. Tokens only — never hardcode a hex that duplicates a token. */
+
+/* The nav centers the tile column within A's 220px lane so it floats mid-page. */
+.nav {
+  display: flex;
+  justify-content: center;
+}
+
 .rail {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-3);
   list-style: none;
   padding: 0;
@@ -18,14 +27,29 @@
   justify-content: center;
   cursor: pointer;
   padding: 0;
+  overflow: hidden;
   opacity: 0.5;
   transition:
     opacity 0.15s ease,
     border-color 0.15s ease,
     box-shadow 0.15s ease;
+}
+
+/* Real square logo (Track E): contain within the tile, small breathing room. */
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  display: block;
+}
+
+/* Monogram fallback until a logo exists. */
+.monogram {
   font-family: var(--font-serif);
   font-weight: 400;
   font-size: 1.125rem;
+  line-height: 1;
   color: var(--ink);
 }
 
