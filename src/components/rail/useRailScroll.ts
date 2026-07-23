@@ -22,6 +22,16 @@ function prefersReducedMotion(): boolean {
   )
 }
 
+// True when the event originates inside a text field — don't hijack those.
+// Guards against a non-Element target (e.g. window/document) having no
+// .closest before we call it.
+function isEditableTarget(target: EventTarget | null): boolean {
+  return (
+    target instanceof Element &&
+    target.closest('input, textarea, select, [contenteditable="true"]') !== null
+  )
+}
+
 export function useRailScroll({ listRef, tileRefs }: UseRailScrollArgs) {
   const { activeIndex, projects, next, prev, setActiveIndex } = usePortfolio()
   const count = projects.length
@@ -66,14 +76,8 @@ export function useRailScroll({ listRef, tileRefs }: UseRailScrollArgs) {
     }
 
     const onWheel = (e: WheelEvent) => {
-      // Don't hijack scrolling inside a genuinely scrollable inner element
-      // (defensive — the app has none today) or while typing in a field.
-      const target = e.target as HTMLElement | null
-      if (
-        target?.closest('input, textarea, select, [contenteditable="true"]')
-      ) {
-        return
-      }
+      // Don't hijack while typing in a field (defensive — no inputs today).
+      if (isEditableTarget(e.target)) return
 
       const down = e.deltaY > 0
 
@@ -93,12 +97,7 @@ export function useRailScroll({ listRef, tileRefs }: UseRailScrollArgs) {
     }
 
     const onKeyDown = (e: KeyboardEvent) => {
-      const target = e.target as HTMLElement | null
-      if (
-        target?.closest('input, textarea, select, [contenteditable="true"]')
-      ) {
-        return
-      }
+      if (isEditableTarget(e.target)) return
 
       switch (e.key) {
         case 'ArrowDown':
