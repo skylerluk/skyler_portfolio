@@ -1,0 +1,38 @@
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+.item {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+/* Center item stays centered; edges hug the corners */
+.item:nth-child(2) {
+  text-align: center;
+}
+
+.item:last-child {
+  text-align: right;
+}
+
+@media (max-width: 860px) {
+  .meta {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: var(--space-2) var(--space-4);
+  }
+
+  .item,
+  .item:nth-child(2),
+  .item:last-child {
+    text-align: left;
+  }
+}
