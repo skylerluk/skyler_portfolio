@@ -33,14 +33,17 @@ export const projectAssets: Record<string, ProjectAssets> = {
       {
         src: '/assets/sailor/01.webp',
         alt: 'Sailor app — Inbox with AI-suggested next actions for each lead',
+        caption: 'Lead inbox',
       },
       {
         src: '/assets/sailor/02.webp',
         alt: 'Sailor app — Today dashboard showing pipeline commission and lead activity',
+        caption: 'Pipeline overview',
       },
       {
         src: '/assets/sailor/03.webp',
         alt: 'Sailor marketing site — “Your WhatsApp, Organized,” the first CRM built for mobile',
+        caption: 'Product website',
       },
     ],
   },

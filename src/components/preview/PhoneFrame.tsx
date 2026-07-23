@@ -11,24 +11,16 @@ interface PhoneFrameProps {
   shot?: Screenshot
   /** Project name — shown in the placeholder so the empty state reads intentional. */
   label: string
-  /** A secondary phone in a side-by-side group sits a touch smaller/back. */
-  supporting?: boolean
 }
 
-export function PhoneFrame({
-  shot,
-  label,
-  supporting = false,
-}: PhoneFrameProps) {
+export function PhoneFrame({ shot, label }: PhoneFrameProps) {
   // Fall back to placeholder if a real image fails to load. Reset on src change.
   const [errored, setErrored] = useState(false)
   useEffect(() => setErrored(false), [shot?.src])
   const hasImage = Boolean(shot?.src) && !errored
 
   return (
-    <figure
-      className={`${styles.phone} ${supporting ? styles.supporting : ''}`}
-    >
+    <figure className={styles.phone}>
       <div className={styles.body}>
         {hasImage ? (
           <img

@@ -30,16 +30,29 @@
 }
 
 /* Portrait side-by-side: all shots the same size, sharing the row evenly.
- * Width-driven (flex) so 2–3 phones always fit; aspect-ratio sets the height. */
-.portrait.multi {
-  align-items: center;
+ * Each shot is a phone + its caption; width-driven so 2–3 always fit. */
+.portrait {
+  align-items: flex-start;
 }
 
-.portrait.multi > * {
+/* A shot = the frame plus its descriptive caption, stacked. */
+.shot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
   flex: 1 1 0;
   min-width: 0;
-  height: auto;
   max-width: 232px;
+}
+
+.shotCaption {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
 }
 
 /* On narrow screens, groups stack / reduce to the primary; keep them uncramped. */

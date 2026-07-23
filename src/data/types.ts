@@ -9,6 +9,8 @@ export type FrameTheme = 'light' | 'dark' // chrome of the preview frame
 export interface Screenshot {
   src: string
   alt: string
+  /** Short descriptive label shown beneath the frame (e.g. "Pipeline overview"). */
+  caption?: string
 }
 
 export interface ProjectLink {

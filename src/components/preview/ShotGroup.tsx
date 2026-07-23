@@ -44,7 +44,12 @@ export function ShotGroup({
     <div className={groupClass} data-count={slots.length}>
       {slots.map((shot, i) =>
         orientation === 'portrait' ? (
-          <PhoneFrame key={i} shot={shot} label={label} supporting={i > 0} />
+          <div className={styles.shot} key={i}>
+            <PhoneFrame shot={shot} label={label} />
+            {shot?.caption && (
+              <span className={styles.shotCaption}>{shot.caption}</span>
+            )}
+          </div>
         ) : (
           <BrowserFrame
             key={i}
