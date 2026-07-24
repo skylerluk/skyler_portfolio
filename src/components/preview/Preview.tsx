@@ -78,6 +78,18 @@ export function Preview() {
               {project.link.label} ↗
             </a>
           )}
+
+          {project.metrics && project.metrics.length > 0 && (
+            <p className={styles.metrics}>
+              {project.metrics.map((m, i) => (
+                <span key={m.label} className={styles.metric}>
+                  {i > 0 && <span className={styles.metricSep}>·</span>}
+                  <span className={styles.metricValue}>{m.value}</span>{' '}
+                  {m.label}
+                </span>
+              ))}
+            </p>
+          )}
         </div>
       </div>
     </section>

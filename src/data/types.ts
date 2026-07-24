@@ -18,6 +18,12 @@ export interface ProjectLink {
   href: string
 }
 
+// A single "by the numbers" stat: `value` is emphasised (accent), `label` reads muted.
+export interface Metric {
+  value: string
+  label: string
+}
+
 export interface ProjectBase {
   id: string // 'sailor'
   index: string // '01'
@@ -27,6 +33,7 @@ export interface ProjectBase {
   status?: ProjectStatus
   stack: string[]
   link?: ProjectLink
+  metrics?: Metric[] // optional one-line "by the numbers" strip
   orientation: Orientation
   theme: FrameTheme
   contentComplete: boolean // false => copy is placeholder (TODO)

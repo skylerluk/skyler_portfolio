@@ -132,6 +132,36 @@
   color: var(--accent-2);
 }
 
+/* Quiet "by the numbers" strip — mono, muted, with accented values. */
+.metrics {
+  margin-top: var(--space-2);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) 0;
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+.metric {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  white-space: nowrap;
+}
+
+.metricSep {
+  margin: 0 0.6em;
+  color: var(--hair);
+}
+
+.metricValue {
+  color: var(--accent);
+  font-weight: 500;
+}
+
 @media (max-width: 860px) {
   .preview {
     padding: var(--space-5);
