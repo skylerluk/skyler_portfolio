@@ -72,15 +72,49 @@ export const projectAssets: Record<string, ProjectAssets> = {
     ],
   },
 
-  // Rail logos for existing projects (previews still show placeholders until
-  // their screenshots are wired).
-  bsg: { logo: '/assets/bsg/bsg_logo.svg', screenshots: [] },
+  // Berkeley Strategy Group — CRM pipeline screenshot + client logos.
+  bsg: {
+    logo: '/assets/bsg/bsg_logo.svg',
+    logoContain: true, // wordmark — show it whole, not cropped
+    screenshots: [
+      {
+        src: '/assets/bsg/01.webp',
+        alt: 'BSG CRM — sales pipeline board (account names blurred)',
+        aspect: 1600 / 870,
+      },
+    ],
+    clients: [
+      { name: 'Amazon', logo: '/assets/bsg/Amazon-Square-Outline-Logo.png' },
+      { name: 'Sweetgreen', logo: '/assets/bsg/sweetgreen_logo.jpg' },
+    ],
+  },
+
+  // Uber Wrapped — two "wrapped" story cards.
   'uber-wrapped': {
     logo: '/assets/uber-wrapped/uber_logo_square.jpg',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/assets/uber-wrapped/01.webp',
+        alt: 'Uber Wrapped — “Breakfast Sandwich, your most-ordered item, 74 times”',
+        aspect: 1200 / 1491,
+      },
+      {
+        src: '/assets/uber-wrapped/02.webp',
+        alt: 'Uber Wrapped — “Your rides timeline,” yearly spend bar chart',
+        aspect: 1200 / 1473,
+      },
+    ],
   },
+
+  // Karpathy Brain — knowledge-graph view.
   'karpathy-brain': {
     logo: '/assets/karpathy-brain/karpathy_logo_square.png',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/assets/karpathy-brain/01.webp',
+        alt: 'Karpathy Brain — interlinked knowledge graph of notes',
+        aspect: 1400 / 1395,
+      },
+    ],
   },
 }

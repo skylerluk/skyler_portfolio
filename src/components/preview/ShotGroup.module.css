@@ -9,20 +9,11 @@
   width: 100%;
 }
 
-/* Landscape frames are width-driven; portrait phones are height-driven. */
-.landscape.single {
-  max-width: 720px;
-}
-
+/* Landscape frames are height-driven (BrowserFrame sets a fixed body height and
+   derives width from each image's aspect), so single and multi both match
+   Sailor's frame height and keep their true aspect. */
 .landscape.multi {
-  max-width: 760px;
   align-items: flex-start;
-}
-
-/* Two landscape frames share the row, scaled down to keep whitespace. */
-.landscape.multi > * {
-  flex: 1 1 0;
-  min-width: 0;
 }
 
 .portrait {

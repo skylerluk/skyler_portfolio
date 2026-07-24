@@ -113,6 +113,25 @@ export function Preview() {
                 {project.link.label} ↗
               </a>
             )}
+
+            {project.clients && project.clients.length > 0 && (
+              <div className={styles.clients}>
+                <span className={styles.clientsLabel}>
+                  Clients we&rsquo;ve worked with
+                </span>
+                <div className={styles.clientRow}>
+                  {project.clients.map((c) => (
+                    <img
+                      key={c.name}
+                      className={styles.clientLogo}
+                      src={c.logo}
+                      alt={c.name}
+                      title={c.name}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Bottom-right "by the numbers" ledger — serif accented values,

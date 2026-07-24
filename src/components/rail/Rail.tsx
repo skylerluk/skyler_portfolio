@@ -39,7 +39,13 @@ export function Rail() {
               >
                 {project.logo ? (
                   // Decorative — the button's aria-label carries the name.
-                  <img className={styles.logo} src={project.logo} alt="" />
+                  <img
+                    className={`${styles.logo} ${
+                      project.logoContain ? styles.logoContain : ''
+                    }`}
+                    src={project.logo}
+                    alt=""
+                  />
                 ) : (
                   <span className={styles.monogram} aria-hidden="true">
                     {monogram}

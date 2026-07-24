@@ -57,6 +57,12 @@
   display: block;
 }
 
+/* Wide/wordmark logos: show the whole thing (no crop), with a little breathing room. */
+.logoContain {
+  object-fit: contain;
+  padding: 5px;
+}
+
 /* Monogram fallback until a logo exists. */
 .monogram {
   font-family: var(--font-serif);

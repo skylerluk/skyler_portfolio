@@ -42,9 +42,18 @@ export interface ProjectBase {
   contentComplete: boolean // false => copy is placeholder (TODO)
 }
 
+export interface Client {
+  name: string
+  logo: string
+}
+
 export interface ProjectAssets {
   logo?: string
+  /** Fit the rail logo with `contain` (whole logo visible) instead of `cover`. */
+  logoContain?: boolean
   screenshots: Screenshot[]
+  /** Optional "clients we've worked with" logos (e.g. for BSG). */
+  clients?: Client[]
 }
 
 export interface Project extends ProjectBase, ProjectAssets {}
