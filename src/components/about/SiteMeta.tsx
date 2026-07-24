@@ -43,9 +43,7 @@ export function SiteMeta() {
 
   return (
     <div className={styles.meta}>
-      <span className={styles.item}>
-        {siteConfig.location} · {siteConfig.coords}
-      </span>
+      <span className={styles.item}>{siteConfig.location}</span>
       <span className={styles.item}>
         <time aria-label="Local time">{formatClock(now)}</time>
         {zone ? ` ${zone}` : ''}

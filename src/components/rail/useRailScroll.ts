@@ -6,9 +6,11 @@
 import { useEffect, useRef, type RefObject } from 'react'
 import { usePortfolio } from '../../app/PortfolioProvider'
 
-// Pacing tuned in the approved comp (OVERVIEW §4):
-const THRESHOLD = 36 // wheel deltaY the accumulator must cross to advance a step
-const LOCK_MS = 340 // cooldown after a step so one swipe doesn't skip several
+// Fluid pacing (reference: bguillaume.info). Scroll distance maps directly to
+// steps with momentum carried over — no post-step lock, so a continuous wheel /
+// trackpad gesture flows smoothly through projects instead of stopping on each.
+const STEP = 90 // wheel delta that advances one project (~one mouse notch)
+const CARRY_CAP = STEP // clamp leftover so momentum can't run away unbounded
 
 interface UseRailScrollArgs {
   listRef: RefObject<HTMLUListElement | null>
@@ -57,23 +59,10 @@ export function useRailScroll({ listRef, tileRefs }: UseRailScrollArgs) {
   // Wheel + keyboard engine — registered once.
   useEffect(() => {
     let accum = 0
-    let locked = false
-    let lockTimer: number | undefined
 
     const atFirst = () => stateRef.current.activeIndex <= 0
     const atLast = () =>
       stateRef.current.activeIndex >= stateRef.current.count - 1
-
-    const step = (dir: 1 | -1) => {
-      if (dir === 1) stateRef.current.next()
-      else stateRef.current.prev()
-      accum = 0
-      if (prefersReducedMotion()) return
-      locked = true
-      lockTimer = window.setTimeout(() => {
-        locked = false
-      }, LOCK_MS)
-    }
 
     const onWheel = (e: WheelEvent) => {
       // Don't hijack while typing in a field (defensive — no inputs today).
@@ -87,13 +76,24 @@ export function useRailScroll({ listRef, tileRefs }: UseRailScrollArgs) {
         return
       }
 
-      // We're going to consume this gesture to drive the rail.
+      // Consume the gesture to drive the rail. Accumulated scroll distance maps
+      // directly to steps (remainder carried), so a continuous wheel/trackpad
+      // gesture flows through projects with momentum — no per-step lock.
       e.preventDefault()
-      if (locked) return
-
       accum += e.deltaY
-      if (accum >= THRESHOLD) step(1)
-      else if (accum <= -THRESHOLD) step(-1)
+
+      while (accum >= STEP && !atLast()) {
+        stateRef.current.next()
+        accum -= STEP
+      }
+      while (accum <= -STEP && !atFirst()) {
+        stateRef.current.prev()
+        accum += STEP
+      }
+
+      // Clamp leftover so momentum can't build up unbounded between steps.
+      if (accum > CARRY_CAP) accum = CARRY_CAP
+      else if (accum < -CARRY_CAP) accum = -CARRY_CAP
     }
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -130,7 +130,6 @@ export function useRailScroll({ listRef, tileRefs }: UseRailScrollArgs) {
     return () => {
       window.removeEventListener('wheel', onWheel)
       window.removeEventListener('keydown', onKeyDown)
-      if (lockTimer !== undefined) window.clearTimeout(lockTimer)
     }
   }, [])
 
