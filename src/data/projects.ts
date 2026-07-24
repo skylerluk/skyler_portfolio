@@ -43,8 +43,22 @@ export const projectsBase: ProjectBase[] = [
     contentComplete: true,
   },
   {
-    id: 'amazon',
+    id: 'team_board',
     index: '03',
+    name: 'IBM Team Board',
+    role: 'Builder',
+    oneLiner:
+      'An interactive team board built as a website design challenge — brief to live site in 60 minutes.',
+    status: 'Live',
+    stack: ['Design', 'Interactive'],
+    link: { label: 'teamjay.vercel.app', href: 'https://teamjay.vercel.app' },
+    orientation: 'landscape',
+    theme: 'light',
+    contentComplete: true,
+  },
+  {
+    id: 'amazon',
+    index: '04',
     name: 'Amazon',
     role: 'Program Manager, Intern',
     // TODO(content): one line on what Skyler actually did + impact.
@@ -56,7 +70,7 @@ export const projectsBase: ProjectBase[] = [
   },
   {
     id: 'ibm',
-    index: '04',
+    index: '05',
     name: 'IBM',
     role: 'Sales',
     // TODO(content): one line on the sales work + outcome.
@@ -68,7 +82,7 @@ export const projectsBase: ProjectBase[] = [
   },
   {
     id: 'uber-wrapped',
-    index: '05',
+    index: '06',
     name: 'Uber Wrapped',
     role: 'Builder',
     oneLiner: 'Turns a year of your Uber rides into a story told back to you.',
@@ -84,7 +98,7 @@ export const projectsBase: ProjectBase[] = [
   },
   {
     id: 'karpathy-brain',
-    index: '06',
+    index: '07',
     name: 'Karpathy Brain',
     role: 'Builder',
     // TODO(content): confirm real description.
@@ -96,7 +110,7 @@ export const projectsBase: ProjectBase[] = [
   },
   {
     id: 'anthology',
-    index: '07',
+    index: '08',
     name: 'Anthology',
     role: 'Venture',
     // TODO(content): confirm public framing (link is real; framing to confirm).
@@ -107,6 +121,23 @@ export const projectsBase: ProjectBase[] = [
     orientation: 'landscape',
     theme: 'light',
     contentComplete: false,
+  },
+  {
+    id: 'skyler-website',
+    index: '09',
+    name: 'Personal Site',
+    role: 'Builder',
+    oneLiner:
+      'An interactive 3D desk — my personal site, explorable object by object.',
+    status: 'Live',
+    stack: ['Interactive', '3D'],
+    link: {
+      label: 'skyler-website.vercel.app',
+      href: 'https://skyler-website.vercel.app/',
+    },
+    orientation: 'landscape',
+    theme: 'dark',
+    contentComplete: true,
   },
 ]
 

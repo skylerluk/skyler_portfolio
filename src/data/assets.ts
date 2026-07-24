@@ -47,5 +47,78 @@ export const projectAssets: Record<string, ProjectAssets> = {
       },
     ],
   },
-  // E2 (the rest) still to come.
+
+  // E2 — IBM Team Board.
+  team_board: {
+    logo: '/assets/team_board/logo.png',
+    screenshots: [
+      {
+        src: '/assets/team_board/01.webp',
+        alt: 'IBM Team Board — a “most wanted” style interactive team board for Jay Smith’s team',
+        aspect: 1248 / 797,
+      },
+    ],
+  },
+
+  // E2 — Personal site (interactive 3D desk).
+  'skyler-website': {
+    logo: '/assets/skyler-website/logo.png',
+    screenshots: [
+      {
+        src: '/assets/skyler-website/01.webp',
+        alt: 'Skyler Luk personal site — an interactive 3D desk scene to explore',
+        aspect: 1800 / 973,
+      },
+    ],
+  },
+
+  // Berkeley Strategy Group — CRM pipeline screenshot + client logos.
+  bsg: {
+    logo: '/assets/bsg/bsg_logo_square.png', // wordmark centered on a white square
+    screenshots: [
+      {
+        src: '/assets/bsg/01.webp',
+        alt: 'BSG CRM — sales pipeline board (account names blurred)',
+        aspect: 1600 / 870,
+      },
+    ],
+    clients: [
+      { name: 'Amazon', logo: '/assets/bsg/Amazon-Square-Outline-Logo.png' },
+      { name: 'Sweetgreen', logo: '/assets/bsg/sweetgreen_logo.jpg' },
+    ],
+  },
+
+  // Uber Wrapped — three "wrapped" screens, framed as uniform squares.
+  'uber-wrapped': {
+    logo: '/assets/uber-wrapped/uber_logo_square.jpg',
+    screenshots: [
+      {
+        src: '/assets/uber-wrapped/01.webp',
+        alt: 'Uber Wrapped — “Breakfast Sandwich, your most-ordered item, 74 times”',
+        aspect: 1,
+      },
+      {
+        src: '/assets/uber-wrapped/02.webp',
+        alt: 'Uber Wrapped — “Your rides timeline,” yearly spend bar chart',
+        aspect: 1,
+      },
+      {
+        src: '/assets/uber-wrapped/03.webp',
+        alt: 'Uber Wrapped — all-time summary dashboard ($26,609 across 810 rides + orders)',
+        aspect: 1,
+      },
+    ],
+  },
+
+  // Karpathy Brain — knowledge-graph view.
+  'karpathy-brain': {
+    logo: '/assets/karpathy-brain/karpathy_logo_square.png',
+    screenshots: [
+      {
+        src: '/assets/karpathy-brain/01.webp',
+        alt: 'Karpathy Brain — interlinked knowledge graph of notes',
+        aspect: 1400 / 1395,
+      },
+    ],
+  },
 }

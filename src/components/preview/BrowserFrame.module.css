@@ -2,9 +2,16 @@
  * shadow only. Chrome switches light/dark per project theme; the surrounding
  * pane always stays paper (owned by Preview.module.css). */
 
+/* The frame is the largest box of the image's aspect that fits within
+   (--fr-max-w x --fr-max-h) — so it fills the space without cropping, whatever
+   the aspect. Multi-shot groups override the width via flex. */
 .frame {
   margin: 0;
-  width: 100%;
+  width: min(
+    100%,
+    var(--fr-max-w, 760px),
+    calc(var(--fr-max-h, 460px) * var(--fr-aspect, 1.6))
+  );
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-window);
@@ -47,11 +54,21 @@
   background: #3a383f;
 }
 
-/* Body holds the screenshot at a stable landscape ratio (no layout shift). */
+/* Body holds the screenshot at a fixed height (≈ Sailor's frame minus the bar);
+   aspect-ratio derives the width. Default 16:10 unless a shot passes its ratio. */
+/* Width-driven: fills the frame width, aspect-ratio sets the height (no crop). */
 .body {
-  aspect-ratio: 16 / 10;
+  width: 100%;
+  aspect-ratio: var(--fr-aspect, 16 / 10);
   position: relative;
   overflow: hidden;
+}
+
+/* Mobile: let the frame fill the column width. */
+@media (max-width: 860px) {
+  .frame {
+    width: 100%;
+  }
 }
 
 .light .body {
@@ -103,8 +120,4 @@
   color: var(--muted);
 }
 
-/* A supporting frame in a multi-shot group sits a touch smaller/back (D1). */
-.supporting {
-  transform: scale(0.92);
-  transform-origin: center;
-}
+/* Multi-shot frames are kept uniform (no de-emphasis). */
