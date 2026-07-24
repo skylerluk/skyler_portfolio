@@ -33,6 +33,7 @@ export interface ProjectBase {
   status?: ProjectStatus
   stack: string[]
   link?: ProjectLink
+  bullets?: string[] // optional highlight bullets shown under the one-liner
   metrics?: Metric[] // optional one-line "by the numbers" strip
   orientation: Orientation
   theme: FrameTheme

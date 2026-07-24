@@ -3,10 +3,34 @@
 // portrait, 1–3 shots) plus the caption. A quiet crossfade plays on change; the
 // pane always stays --paper. Reduced-motion swaps instantly. Owns preview/* only.
 
+import type { ReactNode } from 'react'
 import { usePortfolio } from '../../app/PortfolioProvider'
 import { ShotGroup } from './ShotGroup'
 import { useHashSync, useNeighborPreload } from './usePreviewSync'
+import type { ProjectLink } from '../../data/types'
 import styles from './Preview.module.css'
+
+// Render a bullet, turning the project link's label (e.g. "meetsailor.com")
+// into an accent link where it appears in the text.
+function renderBullet(text: string, link?: ProjectLink): ReactNode {
+  if (!link || !text.includes(link.label)) return text
+  const parts = text.split(link.label)
+  return parts.map((part, i) => (
+    <span key={i}>
+      {part}
+      {i < parts.length - 1 && (
+        <a
+          className={styles.bulletLink}
+          href={link.href}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {link.label}
+        </a>
+      )}
+    </span>
+  ))
+}
 
 export function Preview() {
   const { projects, activeIndex, setActiveIndex } = usePortfolio()
@@ -58,6 +82,16 @@ export function Preview() {
                 ? project.oneLiner
                 : 'Details coming soon.'}
             </p>
+
+            {project.bullets && project.bullets.length > 0 && (
+              <ul className={styles.bullets}>
+                {project.bullets.map((b) => (
+                  <li key={b} className={styles.bullet}>
+                    {renderBullet(b, project.link)}
+                  </li>
+                ))}
+              </ul>
+            )}
 
             {project.stack.length > 0 && (
               <div className={styles.chips}>

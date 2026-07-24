@@ -15,12 +15,16 @@ export const projectsBase: ProjectBase[] = [
     status: 'Live',
     stack: ['Next.js', 'WhatsApp API', 'Webhooks'],
     link: { label: 'meetsailor.com', href: 'https://meetsailor.com' },
+    bullets: [
+      'Designed, built, and shipped the entire product end to end',
+      'Launched on the App Store; live in production at meetsailor.com',
+    ],
     // By-the-numbers (measured across the 4 Sailor repos: app · server · webhook · site).
     metrics: [
       { value: '400+', label: 'commits' },
       { value: '84K+', label: 'lines of code' },
       { value: '4', label: 'services' },
-      { value: '~10 weeks', label: 'solo' },
+      { value: '3 weeks', label: 'solo' },
     ],
     orientation: 'portrait',
     theme: 'dark',
@@ -112,15 +116,11 @@ export const siteConfig: SiteConfig = {
   bio: 'I build products people use, close deals that move companies, and get obsessive about the problems I solve. One person across product, growth & strategy — who ships.',
   currentlyBuilding: 'Sailor',
   githubUser: 'skylerluk',
-  location: 'Berkeley, CA',
+  location: 'Berkeley, CA · San Francisco, CA · New York, NY · Hong Kong, SAR',
   coords: '37.87, −122.27',
   links: [
-    // TODO(content): real email address.
-    { label: 'Email', href: '#' },
-    // TODO(content): real LinkedIn URL.
-    { label: 'LinkedIn', href: '#' },
+    { label: 'Email', href: 'mailto:skylerluk@berkeley.edu' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/skylerluk/' },
     { label: 'GitHub', href: 'https://github.com/skylerluk' },
-    // TODO(content): résumé link.
-    { label: 'Résumé', href: '#' },
   ],
 }
