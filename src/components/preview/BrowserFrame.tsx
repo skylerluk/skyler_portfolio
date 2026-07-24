@@ -14,6 +14,8 @@ interface BrowserFrameProps {
   label: string
   /** Slightly de-emphasize a supporting frame in a multi-shot group (D1). */
   supporting?: boolean
+  /** Body aspect ratio (defaults to 16:10). Lets a shot fill without cropping. */
+  aspect?: number
 }
 
 export function BrowserFrame({
@@ -21,6 +23,7 @@ export function BrowserFrame({
   shot,
   label,
   supporting = false,
+  aspect,
 }: BrowserFrameProps) {
   // Fall back to the placeholder if a real image 404s — a missing file must
   // never break the layout (Track E fills assets later). Reset on src change.
@@ -39,7 +42,10 @@ export function BrowserFrame({
         <span className={styles.dot} />
         <span className={styles.dot} />
       </div>
-      <div className={styles.body}>
+      <div
+        className={styles.body}
+        style={aspect ? { aspectRatio: String(aspect) } : undefined}
+      >
         {hasImage ? (
           <img
             className={styles.img}

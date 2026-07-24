@@ -57,6 +57,7 @@ export function ShotGroup({
             shot={shot}
             label={label}
             supporting={i > 0}
+            aspect={shot?.aspect}
           />
         ),
       )}

@@ -2,9 +2,13 @@
  * shadow only. Chrome switches light/dark per project theme; the surrounding
  * pane always stays paper (owned by Preview.module.css). */
 
+/* Height-driven so a landscape frame matches Sailor's phone height: the body has
+   a fixed height and its aspect-ratio sets the width (wider = more horizontal).
+   The frame shrinks to that width. */
 .frame {
   margin: 0;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   border-radius: var(--radius-lg);
   overflow: hidden;
   box-shadow: var(--shadow-window);
@@ -47,11 +51,25 @@
   background: #3a383f;
 }
 
-/* Body holds the screenshot at a stable landscape ratio (no layout shift). */
+/* Body holds the screenshot at a fixed height (≈ Sailor's frame minus the bar);
+   aspect-ratio derives the width. Default 16:10 unless a shot passes its ratio. */
 .body {
+  height: 330px;
   aspect-ratio: 16 / 10;
   position: relative;
   overflow: hidden;
+}
+
+/* Mobile: revert to width-driven so the frame fits the column. */
+@media (max-width: 860px) {
+  .frame {
+    width: 100%;
+  }
+
+  .body {
+    height: auto;
+    width: 100%;
+  }
 }
 
 .light .body {

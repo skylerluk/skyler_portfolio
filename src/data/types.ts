@@ -11,6 +11,8 @@ export interface Screenshot {
   alt: string
   /** Short descriptive label shown beneath the frame (e.g. "Pipeline overview"). */
   caption?: string
+  /** Natural width/height ratio; lets a landscape frame match the image (no crop). */
+  aspect?: number
 }
 
 export interface ProjectLink {

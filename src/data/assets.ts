@@ -47,5 +47,40 @@ export const projectAssets: Record<string, ProjectAssets> = {
       },
     ],
   },
-  // E2 (the rest) still to come.
+
+  // E2 — IBM Team Board.
+  team_board: {
+    logo: '/assets/team_board/logo.png',
+    screenshots: [
+      {
+        src: '/assets/team_board/01.webp',
+        alt: 'IBM Team Board — a “most wanted” style interactive team board for Jay Smith’s team',
+        aspect: 1248 / 797,
+      },
+    ],
+  },
+
+  // E2 — Personal site (interactive 3D desk).
+  'skyler-website': {
+    logo: '/assets/skyler-website/logo.png',
+    screenshots: [
+      {
+        src: '/assets/skyler-website/01.webp',
+        alt: 'Skyler Luk personal site — an interactive 3D desk scene to explore',
+        aspect: 1800 / 973,
+      },
+    ],
+  },
+
+  // Rail logos for existing projects (previews still show placeholders until
+  // their screenshots are wired).
+  bsg: { logo: '/assets/bsg/bsg_logo.svg', screenshots: [] },
+  'uber-wrapped': {
+    logo: '/assets/uber-wrapped/uber_logo_square.jpg',
+    screenshots: [],
+  },
+  'karpathy-brain': {
+    logo: '/assets/karpathy-brain/karpathy_logo_square.png',
+    screenshots: [],
+  },
 }
