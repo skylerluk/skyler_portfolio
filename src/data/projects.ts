@@ -17,8 +17,8 @@ export const projectsBase: ProjectBase[] = [
     link: { label: 'meetsailor.com', href: 'https://meetsailor.com' },
     // By-the-numbers (measured across the 4 Sailor repos: app · server · webhook · site).
     metrics: [
-      { value: '400', label: 'commits' },
-      { value: '84k', label: 'lines of code' },
+      { value: '400+', label: 'commits' },
+      { value: '84K+', label: 'lines of code' },
       { value: '4', label: 'services' },
       { value: '~10 weeks', label: 'solo' },
     ],

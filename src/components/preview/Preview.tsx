@@ -36,59 +36,62 @@ export function Preview() {
           />
         </div>
 
-        <div className={styles.caption}>
-          <div className={styles.metaRow}>
-            <span className={styles.index}>{project.index}</span>
-            <span className={styles.name} aria-live="polite">
-              {project.name}
-            </span>
-            <span className={styles.role}>{project.role}</span>
-            {project.status && (
-              <span className={styles.status}>{project.status}</span>
+        <div className={styles.captionRow}>
+          <div className={styles.caption}>
+            <div className={styles.metaRow}>
+              <span className={styles.index}>{project.index}</span>
+              <span className={styles.name} aria-live="polite">
+                {project.name}
+              </span>
+              <span className={styles.role}>{project.role}</span>
+              {project.status && (
+                <span className={styles.status}>{project.status}</span>
+              )}
+            </div>
+
+            <p
+              className={`${styles.oneLiner} ${
+                project.contentComplete ? '' : styles.pending
+              }`}
+            >
+              {project.contentComplete
+                ? project.oneLiner
+                : 'Details coming soon.'}
+            </p>
+
+            {project.stack.length > 0 && (
+              <div className={styles.chips}>
+                {project.stack.map((tech) => (
+                  <span key={tech} className={styles.chip}>
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {project.link && (
+              <a
+                className={styles.link}
+                href={project.link.href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {project.link.label} ↗
+              </a>
             )}
           </div>
 
-          <p
-            className={`${styles.oneLiner} ${
-              project.contentComplete ? '' : styles.pending
-            }`}
-          >
-            {project.contentComplete
-              ? project.oneLiner
-              : 'Details coming soon.'}
-          </p>
-
-          {project.stack.length > 0 && (
-            <div className={styles.chips}>
-              {project.stack.map((tech) => (
-                <span key={tech} className={styles.chip}>
-                  {tech}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {project.link && (
-            <a
-              className={styles.link}
-              href={project.link.href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {project.link.label} ↗
-            </a>
-          )}
-
+          {/* Bottom-right "by the numbers" ledger — serif accented values,
+              black mono labels. Uses the free space beside the caption. */}
           {project.metrics && project.metrics.length > 0 && (
-            <p className={styles.metrics}>
-              {project.metrics.map((m, i) => (
-                <span key={m.label} className={styles.metric}>
-                  {i > 0 && <span className={styles.metricSep}>·</span>}
-                  <span className={styles.metricValue}>{m.value}</span>{' '}
-                  {m.label}
-                </span>
+            <aside className={styles.ledger} aria-label="By the numbers">
+              {project.metrics.map((m) => (
+                <div key={m.label} className={styles.ledgerRow}>
+                  <span className={styles.ledgerValue}>{m.value}</span>
+                  <span className={styles.ledgerLabel}>{m.label}</span>
+                </div>
               ))}
-            </p>
+            </aside>
           )}
         </div>
       </div>
