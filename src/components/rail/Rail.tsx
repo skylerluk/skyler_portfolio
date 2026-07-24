@@ -1,6 +1,7 @@
 // Track C — the production rail. Owns src/components/rail/* only.
 // C0: square logo tiles, active/hover/focus states, click selection.
-// C1: wheel-driven scroll engine + keyboard nav via useRailScroll.
+// C3: native scroll-position-driven selection (see useRailScroll) — the
+//     centered tile is active and scales up; the preview follows.
 // Consumes shared state via usePortfolio(); never edits App.tsx / Layout / tokens.
 
 import { useRef } from 'react'
@@ -11,7 +12,8 @@ import styles from './Rail.module.css'
 export function Rail() {
   const { projects, activeIndex, setActiveIndex } = usePortfolio()
 
-  // Refs the scroll engine uses to center the active tile in view.
+  // Refs the interaction engine uses: the <ul> to detect overflow / scope
+  // keyboard, and each tile to keep the selected one centered when overflowing.
   const listRef = useRef<HTMLUListElement>(null)
   const tileRefs = useRef<(HTMLButtonElement | null)[]>([])
 

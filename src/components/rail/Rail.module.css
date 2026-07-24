@@ -1,26 +1,42 @@
 /* Track C rail. Tokens only — never hardcode a hex that duplicates a token. */
 
-/* The nav centers the tile column within A's 220px lane so it floats mid-page. */
+/*
+ * Statically centered column: the column's middle sits at the lane's vertical
+ * center (A's grid cell centers it), so the MIDDLE project lands at screen
+ * center for any project count — Sailor (first) rides a bit higher, near the
+ * About text. The SELECTED tile is highlighted/scaled wherever it sits; the
+ * wheel engine steps the selection. For lists too tall to fit, the column
+ * becomes a native scroll container (mandatory snap) and the selected tile is
+ * kept centered.
+ */
+
 .nav {
   display: flex;
   justify-content: center;
-  /* Cap the rail to the lane height; long lists scroll internally with the
-     active tile kept centered (C1). Focus rings must not clip — hence the
-     padding, and overflow only on the scroll axis. */
+  /* Not stretched — A's cell centers this block vertically, putting the
+     column's middle at screen center. Cap to the lane so long lists scroll. */
   max-height: 100vh;
   max-height: 100dvh;
+  min-height: 0;
 }
 
 .rail {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-3);
+  gap: var(--space-4);
   list-style: none;
-  padding: var(--space-2);
   margin: 0;
+  max-height: 100%;
+  min-height: 0;
+  /* Scroll container for overflow only (many projects); mandatory snap so the
+     selected tile settles crisply on center when scrolling is needed. */
   overflow-y: auto;
   overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: y mandatory;
+  /* Room so the scaled active tile and focus ring are never clipped. */
+  padding: var(--space-4);
   /* Hidden scrollbar — the surface stays seamless. */
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -31,8 +47,11 @@
 }
 
 .tile {
-  width: 46px;
-  height: 46px;
+  /* Larger icons: 46 → 56px. */
+  width: 56px;
+  height: 56px;
+  flex: 0 0 auto;
+  scroll-snap-align: center;
   border-radius: var(--radius-md);
   border: 1px solid var(--hair);
   background: var(--paper);
@@ -42,19 +61,21 @@
   cursor: pointer;
   padding: 0;
   overflow: hidden;
-  opacity: 0.5;
+  opacity: 0.55;
+  transform: scale(1);
+  transform-origin: center;
   transition:
-    opacity 0.15s ease,
-    border-color 0.15s ease,
-    box-shadow 0.15s ease;
+    transform 0.25s ease,
+    opacity 0.25s ease,
+    border-color 0.25s ease;
 }
 
-/* Real square logo (Track E): contain within the tile, small breathing room. */
+/* Real square logo (Track E): contain within the tile, proportional room. */
 .logo {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  padding: 6px;
+  padding: 7px;
   display: block;
 }
 
@@ -62,28 +83,44 @@
 .monogram {
   font-family: var(--font-serif);
   font-weight: 400;
-  font-size: 1.125rem;
+  font-size: 1.375rem;
   line-height: 1;
   color: var(--ink);
 }
 
 .tile:hover {
-  opacity: 0.85;
+  opacity: 0.8;
 }
 
+/* Selected tile. Scale + opacity are the primary signal (like the reference);
+   the accent border is kept subtle, the ring dropped so the growth reads
+   cleanly. */
 .tile.active {
   opacity: 1;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+  transform: scale(1.15);
+  border-color: var(--accent-line);
 }
 
 .tile:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
-/* Mobile (≤860px): A's grid turns the rail into a horizontal strip.
-   Horizontal scroll, comfortable tap targets, momentum, hidden scrollbar. */
+/* Reduced motion: no scale/transition animation; active still reads via
+   opacity + a firmer border. Scrolling is set to instant in the hook. */
+@media (prefers-reduced-motion: reduce) {
+  .tile {
+    transition: none;
+    transform: none;
+  }
+  .tile.active {
+    transform: none;
+    border-color: var(--accent);
+  }
+}
+
+/* Mobile (≤860px): A's grid turns the rail into a horizontal strip. Selected
+   tile scales; the strip scrolls horizontally with mandatory snap when needed. */
 @media (max-width: 860px) {
   .nav {
     max-height: none;
@@ -92,16 +129,9 @@
 
   .rail {
     flex-direction: row;
+    max-height: none;
     overflow-x: auto;
     overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x proximity;
-    /* ≥44px hit area even though the tile visual stays 46px. */
-    padding: var(--space-3);
-  }
-
-  .tile {
-    scroll-snap-align: center;
-    flex: 0 0 auto;
+    scroll-snap-type: x mandatory;
   }
 }
