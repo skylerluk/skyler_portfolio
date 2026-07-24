@@ -54,7 +54,7 @@
 /* Body holds the screenshot at a fixed height (≈ Sailor's frame minus the bar);
    aspect-ratio derives the width. Default 16:10 unless a shot passes its ratio. */
 .body {
-  height: 330px;
+  height: var(--browser-body-h, 330px);
   aspect-ratio: 16 / 10;
   position: relative;
   overflow: hidden;

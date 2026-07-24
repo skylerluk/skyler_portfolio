@@ -74,8 +74,7 @@ export const projectAssets: Record<string, ProjectAssets> = {
 
   // Berkeley Strategy Group — CRM pipeline screenshot + client logos.
   bsg: {
-    logo: '/assets/bsg/bsg_logo.svg',
-    logoContain: true, // wordmark — show it whole, not cropped
+    logo: '/assets/bsg/bsg_logo_square.png', // wordmark centered on a white square
     screenshots: [
       {
         src: '/assets/bsg/01.webp',
@@ -89,19 +88,24 @@ export const projectAssets: Record<string, ProjectAssets> = {
     ],
   },
 
-  // Uber Wrapped — two "wrapped" story cards.
+  // Uber Wrapped — three "wrapped" screens, framed as uniform squares.
   'uber-wrapped': {
     logo: '/assets/uber-wrapped/uber_logo_square.jpg',
     screenshots: [
       {
         src: '/assets/uber-wrapped/01.webp',
         alt: 'Uber Wrapped — “Breakfast Sandwich, your most-ordered item, 74 times”',
-        aspect: 1200 / 1491,
+        aspect: 1,
       },
       {
         src: '/assets/uber-wrapped/02.webp',
         alt: 'Uber Wrapped — “Your rides timeline,” yearly spend bar chart',
-        aspect: 1200 / 1473,
+        aspect: 1,
+      },
+      {
+        src: '/assets/uber-wrapped/03.webp',
+        alt: 'Uber Wrapped — all-time summary dashboard ($26,609 across 810 rides + orders)',
+        aspect: 1,
       },
     ],
   },

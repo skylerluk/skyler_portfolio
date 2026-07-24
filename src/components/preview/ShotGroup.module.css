@@ -12,8 +12,12 @@
 /* Landscape frames are height-driven (BrowserFrame sets a fixed body height and
    derives width from each image's aspect), so single and multi both match
    Sailor's frame height and keep their true aspect. */
+/* Multiple landscape frames: shrink the shared frame height so 2–3 fit the row
+   at a uniform size. */
 .landscape.multi {
   align-items: flex-start;
+  gap: var(--space-4);
+  --browser-body-h: 230px;
 }
 
 .portrait {
