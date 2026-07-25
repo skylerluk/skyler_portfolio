@@ -14,8 +14,7 @@ import styles from './GithubTracker.module.css'
 
 type Status = 'loading' | 'ready' | 'error'
 
-const WEEKS = 20
-const CELLS = WEEKS * 7
+const CELLS = 50 // heatmap shows the past ~50 days
 
 const LEVEL_CLASS = [
   styles.level0,
@@ -89,8 +88,7 @@ export function GithubTracker() {
   // ---- Ready ----
   const cells = contribs.slice(-CELLS)
   const total = contribs.reduce((sum, c) => sum + c.count, 0)
-  const totalLabel =
-    total >= 100 ? `${Math.floor(total / 100) * 100}+` : `${total}`
+  const totalLabel = total.toLocaleString()
 
   return (
     <div

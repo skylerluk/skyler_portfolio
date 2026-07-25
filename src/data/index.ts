@@ -10,7 +10,7 @@ export function getProjects(): Project[] {
     const assets = projectAssets[base.id]
     return {
       ...base,
-      logo: assets?.logo,
+      ...assets, // logo, logoContain, clients, screenshots
       screenshots: assets?.screenshots ?? [],
     }
   })
