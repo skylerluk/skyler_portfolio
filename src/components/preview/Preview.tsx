@@ -51,21 +51,51 @@ export function Preview() {
       {/* key={project.id} restarts the enter animation on every change; a
           consistent flex layout keeps height stable so there's no jump. */}
       <div className={styles.fade} key={project.id}>
-        <div className={styles.stage}>
-          <ShotGroup
-            orientation={project.orientation}
-            theme={project.theme}
-            screenshots={project.screenshots}
-            label={project.name}
-          />
-        </div>
+        {(() => {
+          const shots = (
+            <ShotGroup
+              orientation={project.orientation}
+              theme={project.theme}
+              screenshots={project.screenshots}
+              label={project.name}
+            />
+          )
+          return project.link ? (
+            <a
+              className={styles.stage}
+              href={project.link.href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open ${project.name}`}
+            >
+              {shots}
+            </a>
+          ) : (
+            <div className={styles.stage}>{shots}</div>
+          )
+        })()}
 
         <div className={styles.captionRow}>
           <div className={styles.caption}>
             <div className={styles.metaRow}>
               <span className={styles.index}>{project.index}</span>
               <span className={styles.name} aria-live="polite">
-                {project.name}
+                {project.link ? (
+                  <a
+                    className={styles.nameLink}
+                    href={project.link.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {project.name}
+                    <span className={styles.nameArrow} aria-hidden="true">
+                      {' '}
+                      ↗
+                    </span>
+                  </a>
+                ) : (
+                  project.name
+                )}
               </span>
               <span className={styles.role}>{project.role}</span>
               {project.status && (
@@ -91,27 +121,6 @@ export function Preview() {
                   </li>
                 ))}
               </ul>
-            )}
-
-            {project.stack.length > 0 && (
-              <div className={styles.chips}>
-                {project.stack.map((tech) => (
-                  <span key={tech} className={styles.chip}>
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            {project.link && (
-              <a
-                className={styles.link}
-                href={project.link.href}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {project.link.label} ↗
-              </a>
             )}
 
             {project.clients && project.clients.length > 0 && (

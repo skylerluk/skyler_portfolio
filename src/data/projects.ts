@@ -91,6 +91,10 @@ export const projectsBase: ProjectBase[] = [
       'Built a retrieval pipeline over my personal knowledge base, running models locally with LM Studio.',
       'AI engineering end to end: retrieval, local model deployment, and prompt design, fully offline.',
     ],
+    metrics: [
+      { value: '300+', label: 'documents' },
+      { value: '30+', label: 'hours saved' },
+    ],
     stack: ['LLM', 'Local'],
     orientation: 'landscape',
     theme: 'dark',
@@ -136,7 +140,7 @@ export const projectsBase: ProjectBase[] = [
 export const siteConfig: SiteConfig = {
   name: 'Skyler Luk',
   role: 'Builder · Operator · Strategist',
-  bio: 'I build products people use, close deals that move companies, and get obsessive about the problems I solve. One person across product, growth & strategy — who ships.',
+  bio: 'I build products people use, close deals that move companies, and get obsessive about the problems I solve.',
   currentlyBuilding: 'Sailor',
   githubUser: 'skylerluk',
   location: 'Berkeley, CA · San Francisco, CA · New York, NY · Hong Kong, SAR',
