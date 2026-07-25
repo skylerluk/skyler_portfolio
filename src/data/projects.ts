@@ -34,9 +34,13 @@ export const projectsBase: ProjectBase[] = [
     id: 'bsg',
     index: '02',
     name: 'Berkeley Strategy Group',
-    role: 'VP, Partnerships',
-    oneLiner:
-      'Client acquisition and account management for a strategy consultancy serving US and international clients.',
+    role: 'Co-Founder and COO',
+    oneLiner: 'Strategy consultancy based in Berkeley.',
+    bullets: [
+      '$200K in revenue in the first 30 days of launch.',
+      'Sourced and closed 5+ enterprise deals including Amazon, Tesla, and Rackspace, built on 100+ 1:1s with VPs and C-suite at Fortune 500s.',
+      'Hired and managed a lean team of 7.',
+    ],
     stack: ['GTM', 'Accounts'],
     orientation: 'landscape',
     theme: 'light',
@@ -57,35 +61,15 @@ export const projectsBase: ProjectBase[] = [
     contentComplete: true,
   },
   {
-    id: 'amazon',
-    index: '04',
-    name: 'Amazon',
-    role: 'Program Manager, Intern',
-    // TODO(content): one line on what Skyler actually did + impact.
-    oneLiner: 'TODO(content): one line on what Skyler actually did + impact.',
-    stack: ['PM', 'Ops'],
-    orientation: 'landscape',
-    theme: 'light',
-    contentComplete: false,
-  },
-  {
-    id: 'ibm',
-    index: '05',
-    name: 'IBM',
-    role: 'Sales',
-    // TODO(content): one line on the sales work + outcome.
-    oneLiner: 'TODO(content): one line on the sales work + outcome.',
-    stack: ['Sales', 'B2B'],
-    orientation: 'landscape',
-    theme: 'light',
-    contentComplete: false,
-  },
-  {
     id: 'uber-wrapped',
-    index: '06',
+    index: '04',
     name: 'Uber Wrapped',
     role: 'Builder',
     oneLiner: 'Turns a year of your Uber rides into a story told back to you.',
+    bullets: [
+      'Took raw ride history and turned it into a shareable, animated year in review.',
+      'Design, data viz, and front-end, shipped live at uber-wrapped.vercel.app.',
+    ],
     status: 'Live',
     stack: ['React', 'Data viz'],
     link: {
@@ -98,19 +82,23 @@ export const projectsBase: ProjectBase[] = [
   },
   {
     id: 'karpathy-brain',
-    index: '07',
+    index: '05',
     name: 'Karpathy Brain',
     role: 'Builder',
-    // TODO(content): confirm real description.
-    oneLiner: 'TODO(content): confirm real description.',
+    oneLiner:
+      'A private, local LLM second brain over my own notes and writing.',
+    bullets: [
+      'Built a retrieval pipeline over my personal knowledge base, running models locally with LM Studio.',
+      'AI engineering end to end: retrieval, local model deployment, and prompt design, fully offline.',
+    ],
     stack: ['LLM', 'Local'],
     orientation: 'landscape',
     theme: 'dark',
-    contentComplete: false,
+    contentComplete: true,
   },
   {
     id: 'anthology',
-    index: '08',
+    index: '06',
     name: 'Anthology',
     role: 'Venture',
     // TODO(content): confirm public framing (link is real; framing to confirm).
@@ -124,13 +112,17 @@ export const projectsBase: ProjectBase[] = [
   },
   {
     id: 'skyler-website',
-    index: '09',
+    index: '07',
     name: 'Personal Site',
     role: 'Builder',
     oneLiner:
-      'An interactive 3D desk — my personal site, explorable object by object.',
+      'An explorable, candlelit desk you light up to move through a life.',
+    bullets: [
+      'A cinematic 2.5D personal site, designed and built from scratch.',
+      'Interaction design, motion, and creative front-end treated as craft.',
+    ],
     status: 'Live',
-    stack: ['Interactive', '3D'],
+    stack: ['Design', 'Interactive', '3D'],
     link: {
       label: 'skyler-website.vercel.app',
       href: 'https://skyler-website.vercel.app/',
