@@ -6,6 +6,7 @@
 import type { ReactNode } from 'react'
 import { usePortfolio } from '../../app/PortfolioProvider'
 import { ShotGroup } from './ShotGroup'
+import { RevenueRamp } from './RevenueRamp'
 import { useHashSync, useNeighborPreload } from './usePreviewSync'
 import type { ProjectLink } from '../../data/types'
 import styles from './Preview.module.css'
@@ -143,17 +144,22 @@ export function Preview() {
             )}
           </div>
 
-          {/* Bottom-right "by the numbers" ledger — serif accented values,
-              black mono labels. Uses the free space beside the caption. */}
-          {project.metrics && project.metrics.length > 0 && (
-            <aside className={styles.ledger} aria-label="By the numbers">
-              {project.metrics.map((m) => (
-                <div key={m.label} className={styles.ledgerRow}>
-                  <span className={styles.ledgerValue}>{m.value}</span>
-                  <span className={styles.ledgerLabel}>{m.label}</span>
-                </div>
-              ))}
-            </aside>
+          {/* Right-hand slot: a project has either a revenue ramp (BSG) or the
+              "by the numbers" ledger (Sailor-style), never both. Prefer the ramp. */}
+          {project.revenueRamp ? (
+            <RevenueRamp {...project.revenueRamp} />
+          ) : (
+            project.metrics &&
+            project.metrics.length > 0 && (
+              <aside className={styles.ledger} aria-label="By the numbers">
+                {project.metrics.map((m) => (
+                  <div key={m.label} className={styles.ledgerRow}>
+                    <span className={styles.ledgerValue}>{m.value}</span>
+                    <span className={styles.ledgerLabel}>{m.label}</span>
+                  </div>
+                ))}
+              </aside>
+            )
           )}
         </div>
       </div>

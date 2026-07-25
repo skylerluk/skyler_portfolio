@@ -1,0 +1,166 @@
+/* Revenue-ramp chart (Track G). Same right-hand slot + visual language as the
+   Sailor ledger: serif accent values, mono muted labels, tokens only. */
+
+.ramp {
+  flex: none;
+  align-self: flex-end;
+  width: min(100%, 360px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* Emphasised endpoint value + span label. */
+.head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.value {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.span {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.chartWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.chart {
+  width: 100%;
+  height: 76px;
+  display: block;
+  overflow: visible;
+}
+
+.baseline {
+  stroke: var(--hair);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ramp-draw 650ms ease-out 80ms forwards;
+}
+
+.area {
+  opacity: 0;
+  animation: ramp-fade 700ms ease-out 220ms forwards;
+}
+
+.dot {
+  fill: var(--accent);
+  opacity: 0;
+  animation: ramp-fade 300ms ease-out 640ms forwards;
+}
+
+.gradTop {
+  stop-color: var(--accent);
+  stop-opacity: 0.18;
+}
+
+.gradBottom {
+  stop-color: var(--accent);
+  stop-opacity: 0;
+}
+
+@keyframes ramp-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ramp-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion: render fully drawn, no animation. */
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+
+  .area,
+  .dot {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Tiny axis ends. */
+.axis {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+/* Supporting stat strip — ledger value+label language, inline. */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-1) 0;
+}
+
+.stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35em;
+  white-space: nowrap;
+}
+
+.statSep {
+  margin: 0 0.55em;
+  color: var(--hair);
+}
+
+.statValue {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.statLabel {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* Narrow: full-width, centered beneath the caption. */
+@media (max-width: 860px) {
+  .ramp {
+    width: 100%;
+    align-self: center;
+  }
+}

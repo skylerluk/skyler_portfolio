@@ -26,6 +26,15 @@ export interface Metric {
   label: string
 }
 
+// A stylized revenue-ramp chart (e.g. BSG). Only the endpoints are factual —
+// the curve shape is illustrative (see RevenueRamp.tsx).
+export interface RevenueRamp {
+  endLabel: string // '$200K' — the real, factual endpoint
+  spanLabel: string // 'first 30 days'
+  peak?: number // numeric peak for curve scaling (default 100; e.g. 200)
+  stats?: Metric[] // supporting real numbers (reuses the Metric type)
+}
+
 export interface ProjectBase {
   id: string // 'sailor'
   index: string // '01'
@@ -37,6 +46,7 @@ export interface ProjectBase {
   link?: ProjectLink
   bullets?: string[] // optional highlight bullets shown under the one-liner
   metrics?: Metric[] // optional one-line "by the numbers" strip
+  revenueRamp?: RevenueRamp // optional revenue-ramp chart (right-hand slot)
   orientation: Orientation
   theme: FrameTheme
   contentComplete: boolean // false => copy is placeholder (TODO)

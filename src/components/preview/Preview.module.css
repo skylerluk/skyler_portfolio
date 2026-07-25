@@ -300,4 +300,15 @@ a.stage:focus-visible {
   .preview {
     padding: var(--space-5);
   }
+
+  /* Stack: the right-hand slot (ramp/ledger) drops full-width beneath the
+     caption, centered. */
+  .captionRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ledger {
+    align-self: center;
+  }
 }

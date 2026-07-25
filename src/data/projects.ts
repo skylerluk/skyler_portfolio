@@ -36,11 +36,16 @@ export const projectsBase: ProjectBase[] = [
     name: 'Berkeley Strategy Group',
     role: 'Co-Founder and COO',
     oneLiner: 'Strategy consultancy based in Berkeley.',
-    bullets: [
-      '$200K in revenue in the first 30 days of launch.',
-      'Sourced and closed 5+ enterprise deals including Amazon, Tesla, and Rackspace, built on 100+ 1:1s with VPs and C-suite at Fortune 500s.',
-      'Hired and managed a lean team of 7.',
-    ],
+    revenueRamp: {
+      endLabel: '$200K',
+      spanLabel: 'first 30 days',
+      peak: 200,
+      stats: [
+        { value: '5+', label: 'enterprise deals' },
+        { value: '100+', label: 'exec 1:1s' },
+        { value: '7', label: 'team' },
+      ],
+    },
     stack: ['GTM', 'Accounts'],
     orientation: 'landscape',
     theme: 'light',
