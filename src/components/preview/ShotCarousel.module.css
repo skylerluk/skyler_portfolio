@@ -1,0 +1,140 @@
+/* Responsive multi-shot presenter.
+ *  Desktop (default): slides sit side-by-side, controls hidden.
+ *  Mobile (≤860px):   the track becomes a horizontal scroll-snap carousel,
+ *                     one slide per view, with arrow + dot controls. */
+
+.carousel {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.track {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.portrait .track {
+  gap: var(--space-5);
+}
+
+.landscape .track {
+  gap: var(--space-4);
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.slide {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.portrait .slide {
+  max-width: 168px;
+}
+
+/* Controls hidden on desktop — the side-by-side layout needs none. */
+.arrow,
+.dots {
+  display: none;
+}
+
+/* ---------- Mobile carousel ---------- */
+@media (max-width: 860px) {
+  .track {
+    justify-content: flex-start;
+    gap: 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide,
+  .portrait .slide,
+  .landscape .slide {
+    flex: 0 0 100%;
+    min-width: 100%;
+    max-width: 100%;
+    justify-content: center;
+    scroll-snap-align: center;
+    padding: 0 var(--space-2);
+  }
+
+  /* Arrow buttons — circular, floating over the frame, shadow-lifted. */
+  .arrow {
+    position: absolute;
+    top: 42%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 1px solid var(--hair);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 1.5rem;
+    line-height: 1;
+    padding: 0 0 3px;
+    box-shadow: var(--shadow-window);
+    cursor: pointer;
+    z-index: 2;
+    transition:
+      opacity 0.15s ease,
+      transform 0.15s ease;
+  }
+
+  .prev {
+    left: 0;
+  }
+
+  .next {
+    right: 0;
+  }
+
+  .arrow:active {
+    transform: translateY(-50%) scale(0.92);
+  }
+
+  .arrow:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Dot indicators below the frame. */
+  .dots {
+    display: flex;
+    gap: var(--space-2);
+    justify-content: center;
+    margin-top: var(--space-4);
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: var(--hair);
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .dotActive {
+    background: var(--accent);
+  }
+}

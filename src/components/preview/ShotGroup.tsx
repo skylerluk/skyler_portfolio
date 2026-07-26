@@ -2,13 +2,15 @@
 // each frame lifted by shadow, whitespace preserved. Handles 1/2/3 shots and the
 // zero-shot placeholder case, for both portrait (Sailor) and landscape.
 //
-// Layout is `side-by-side` today (Skyler's open decision, OVERVIEW §8). The code
-// is structured so a `main + thumbnails` mode can be added later behind `mode`
-// without touching call sites — the default keeps working for any shot count.
+// Single shot renders one centered frame. Multiple shots go through ShotCarousel,
+// which is side-by-side on desktop and a swipeable carousel on mobile (arrows +
+// dots) rather than a long vertical scroll list.
 
+import type { ReactNode } from 'react'
 import type { Orientation, FrameTheme, Screenshot } from '../../data/types'
 import { BrowserFrame } from './BrowserFrame'
 import { PhoneFrame } from './PhoneFrame'
+import { ShotCarousel } from './ShotCarousel'
 import styles from './ShotGroup.module.css'
 
 export type ShotGroupMode = 'side-by-side' // 'main-thumbnails' reserved for later
@@ -36,40 +38,55 @@ export function ShotGroup({
   const slots: (Screenshot | undefined)[] =
     shots.length > 0 ? shots : [undefined]
 
+  // One slide's content: a phone (+ caption) for portrait, a browser frame
+  // (+ caption when present) for landscape. Shared by both the single and multi
+  // (carousel) paths so captions render identically either way.
+  const renderSlot = (shot: Screenshot | undefined): ReactNode =>
+    orientation === 'portrait' ? (
+      <div className={styles.shot}>
+        <PhoneFrame shot={shot} label={label} />
+        {shot?.caption && (
+          <span className={styles.shotCaption}>{shot.caption}</span>
+        )}
+      </div>
+    ) : shot?.caption ? (
+      <div className={styles.shotLand}>
+        <BrowserFrame
+          theme={theme}
+          shot={shot}
+          label={label}
+          aspect={shot.aspect}
+        />
+        <span className={styles.shotCaption}>{shot.caption}</span>
+      </div>
+    ) : (
+      <BrowserFrame
+        theme={theme}
+        shot={shot}
+        label={label}
+        aspect={shot?.aspect}
+      />
+    )
+
+  // Multiple shots → carousel (side-by-side on desktop, swipeable on mobile).
+  if (slots.length > 1) {
+    return (
+      <ShotCarousel
+        orientation={orientation}
+        label={label}
+        slides={slots.map((shot) => renderSlot(shot))}
+      />
+    )
+  }
+
+  // Single shot → one centered frame.
   const groupClass = `${styles.group} ${
     orientation === 'portrait' ? styles.portrait : styles.landscape
-  } ${slots.length > 1 ? styles.multi : styles.single} ${styles[mode] ?? ''}`
+  } ${styles.single} ${styles[mode] ?? ''}`
 
   return (
-    <div className={groupClass} data-count={slots.length}>
-      {slots.map((shot, i) =>
-        orientation === 'portrait' ? (
-          <div className={styles.shot} key={i}>
-            <PhoneFrame shot={shot} label={label} />
-            {shot?.caption && (
-              <span className={styles.shotCaption}>{shot.caption}</span>
-            )}
-          </div>
-        ) : shot?.caption ? (
-          <div className={styles.shotLand} key={i}>
-            <BrowserFrame
-              theme={theme}
-              shot={shot}
-              label={label}
-              aspect={shot?.aspect}
-            />
-            <span className={styles.shotCaption}>{shot.caption}</span>
-          </div>
-        ) : (
-          <BrowserFrame
-            key={i}
-            theme={theme}
-            shot={shot}
-            label={label}
-            aspect={shot?.aspect}
-          />
-        ),
-      )}
+    <div className={groupClass} data-count={1}>
+      {renderSlot(slots[0])}
     </div>
   )
 }
