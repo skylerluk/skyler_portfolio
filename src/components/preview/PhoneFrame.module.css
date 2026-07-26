@@ -15,6 +15,16 @@
   flex: none;
 }
 
+/* Mobile: one phone per carousel slide fills the full column width, which would
+   make it far too tall. Size it by height instead and let the aspect-ratio pick
+   the width, so a single phone sits comfortably in view. */
+@media (max-width: 860px) {
+  .phone {
+    width: auto;
+    height: min(58vh, 500px);
+  }
+}
+
 .body {
   flex: 1;
   position: relative;

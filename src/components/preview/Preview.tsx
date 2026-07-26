@@ -48,7 +48,9 @@ export function Preview() {
   const clientsBlock =
     project.clients && project.clients.length > 0 ? (
       <div className={styles.clients}>
-        <span className={styles.clientsLabel}>Clients we&rsquo;ve worked with</span>
+        <span className={styles.clientsLabel}>
+          Clients we&rsquo;ve worked with
+        </span>
         <div className={styles.clientRow}>
           {project.clients.map((c) =>
             c.logo ? (
