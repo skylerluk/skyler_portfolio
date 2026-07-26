@@ -54,7 +54,7 @@ export interface ProjectBase {
 
 export interface Client {
   name: string
-  logo: string
+  logo?: string // when absent, the client renders as a text tag
 }
 
 export interface ProjectAssets {

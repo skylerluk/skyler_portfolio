@@ -48,6 +48,14 @@
   max-width: 168px;
 }
 
+/* Landscape frame + caption wrapper (the frame keeps its own width). */
+.shotLand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+}
+
 .shotCaption {
   font-family: var(--font-mono);
   font-size: 0.6875rem;

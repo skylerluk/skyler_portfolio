@@ -76,7 +76,11 @@ export function Preview() {
           )
         })()}
 
-        <div className={styles.captionRow}>
+        <div
+          className={`${styles.captionRow} ${
+            project.revenueRamp ? styles.captionRowTop : ''
+          }`}
+        >
           <div className={styles.caption}>
             <div className={styles.metaRow}>
               <span className={styles.index}>{project.index}</span>
@@ -130,15 +134,21 @@ export function Preview() {
                   Clients we&rsquo;ve worked with
                 </span>
                 <div className={styles.clientRow}>
-                  {project.clients.map((c) => (
-                    <img
-                      key={c.name}
-                      className={styles.clientLogo}
-                      src={c.logo}
-                      alt={c.name}
-                      title={c.name}
-                    />
-                  ))}
+                  {project.clients.map((c) =>
+                    c.logo ? (
+                      <img
+                        key={c.name}
+                        className={styles.clientLogo}
+                        src={c.logo}
+                        alt={c.name}
+                        title={c.name}
+                      />
+                    ) : (
+                      <span key={c.name} className={styles.clientTag}>
+                        {c.name}
+                      </span>
+                    ),
+                  )}
                 </div>
               </div>
             )}

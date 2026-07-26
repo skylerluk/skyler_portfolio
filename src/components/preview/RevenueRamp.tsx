@@ -35,6 +35,8 @@ function buildPaths() {
 
 export function RevenueRamp({ endLabel, spanLabel, stats }: RevenueRampData) {
   const { line, area, end } = buildPaths()
+  // Axis end day, read from the span label (e.g. "first 60 days" → "day 60").
+  const endDay = spanLabel.match(/\d+/)?.[0] ?? ''
 
   return (
     <aside
@@ -73,7 +75,7 @@ export function RevenueRamp({ endLabel, spanLabel, stats }: RevenueRampData) {
         </svg>
         <div className={styles.axis}>
           <span>day 0</span>
-          <span>day 30</span>
+          <span>{endDay ? `day ${endDay}` : ''}</span>
         </div>
       </div>
 

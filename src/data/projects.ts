@@ -35,14 +35,19 @@ export const projectsBase: ProjectBase[] = [
     index: '02',
     name: 'Berkeley Strategy Group',
     role: 'Co-Founder and COO',
-    oneLiner: 'Strategy consultancy based in Berkeley.',
+    oneLiner:
+      'Strategy consultancy specializing in AI strategy and voice of the customer.',
+    bullets: [
+      'Owned 50+ client relationships end to end.',
+      'Personally led 100+ client intros with F500 VPs and C-Suite.',
+    ],
     revenueRamp: {
-      endLabel: '$200K',
-      spanLabel: 'first 30 days',
+      endLabel: '$200K+',
+      spanLabel: 'first 60 days',
       peak: 200,
       stats: [
         { value: '5+', label: 'enterprise deals' },
-        { value: '100+', label: 'exec 1:1s' },
+        { value: '300+', label: 'exec 1:1s' },
         { value: '7', label: 'team' },
       ],
     },
@@ -52,17 +57,23 @@ export const projectsBase: ProjectBase[] = [
     contentComplete: true,
   },
   {
-    id: 'team_board',
+    id: 'skyler-website',
     index: '03',
-    name: 'IBM Team Board',
+    name: 'Personal Site',
     role: 'Builder',
-    oneLiner:
-      'An interactive team board built as a website design challenge — brief to live site in 60 minutes.',
+    oneLiner: 'Interactive personal candlelit desk.',
+    bullets: [
+      'A cinematic 2.5D personal site, designed and built from scratch.',
+      'Interaction design, motion, and creative front-end treated as craft.',
+    ],
     status: 'Live',
-    stack: ['Design', 'Interactive'],
-    link: { label: 'teamjay.vercel.app', href: 'https://teamjay.vercel.app' },
+    stack: ['Design', 'Interactive', '3D'],
+    link: {
+      label: 'skyler-website.vercel.app',
+      href: 'https://skyler-website.vercel.app/',
+    },
     orientation: 'landscape',
-    theme: 'light',
+    theme: 'dark',
     contentComplete: true,
   },
   {
@@ -120,24 +131,17 @@ export const projectsBase: ProjectBase[] = [
     contentComplete: false,
   },
   {
-    id: 'skyler-website',
+    id: 'team_board',
     index: '07',
-    name: 'Personal Site',
+    name: 'IBM Team Board',
     role: 'Builder',
     oneLiner:
-      'An explorable, candlelit desk you light up to move through a life.',
-    bullets: [
-      'A cinematic 2.5D personal site, designed and built from scratch.',
-      'Interaction design, motion, and creative front-end treated as craft.',
-    ],
+      'An interactive team board built as a website design challenge — brief to live site in 60 minutes.',
     status: 'Live',
-    stack: ['Design', 'Interactive', '3D'],
-    link: {
-      label: 'skyler-website.vercel.app',
-      href: 'https://skyler-website.vercel.app/',
-    },
+    stack: ['Design', 'Interactive'],
+    link: { label: 'teamjay.vercel.app', href: 'https://teamjay.vercel.app' },
     orientation: 'landscape',
-    theme: 'dark',
+    theme: 'light',
     contentComplete: true,
   },
 ]

@@ -3,7 +3,7 @@
 
 .ramp {
   flex: none;
-  align-self: flex-end;
+  align-self: flex-start;
   width: min(100%, 360px);
   display: flex;
   flex-direction: column;
