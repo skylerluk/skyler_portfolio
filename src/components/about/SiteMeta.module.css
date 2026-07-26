@@ -35,4 +35,12 @@
   .item:last-child {
     text-align: left;
   }
+
+  /* The locations line ("Berkeley, CA · San Francisco, CA · New York, NY") is a
+     single nowrap span ~451px wide. In the stacked single-column grid it can't
+     shrink, so it forces the whole shared track past the viewport (horizontal
+     scroll). Let it wrap on mobile so the panel fits the screen. */
+  .item {
+    white-space: normal;
+  }
 }
