@@ -124,4 +124,17 @@ export const projectAssets: Record<string, ProjectAssets> = {
       },
     ],
   },
+
+  // Anthology — venture studio site (SF × Dubai).
+  anthology: {
+    logo: '/assets/anthology/logo.png',
+    screenshots: [
+      {
+        src: '/assets/anthology/01.webp',
+        alt: 'Anthology — venture studio landing page (Golden Gate Bridge × Burj Khalifa)',
+        aspect: 1800 / 978,
+        caption: 'Click to open',
+      },
+    ],
+  },
 }

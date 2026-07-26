@@ -43,6 +43,32 @@ export function Preview() {
   const project = projects[activeIndex]
   if (!project) return null
 
+  // Clients render in the caption normally, but move under the revenue ramp when
+  // one is present (keeps the left column for text + bullets).
+  const clientsBlock =
+    project.clients && project.clients.length > 0 ? (
+      <div className={styles.clients}>
+        <span className={styles.clientsLabel}>Clients we&rsquo;ve worked with</span>
+        <div className={styles.clientRow}>
+          {project.clients.map((c) =>
+            c.logo ? (
+              <img
+                key={c.name}
+                className={styles.clientLogo}
+                src={c.logo}
+                alt={c.name}
+                title={c.name}
+              />
+            ) : (
+              <span key={c.name} className={styles.clientTag}>
+                {c.name}
+              </span>
+            ),
+          )}
+        </div>
+      </div>
+    ) : null
+
   return (
     <section
       className={styles.preview}
@@ -128,36 +154,14 @@ export function Preview() {
               </ul>
             )}
 
-            {project.clients && project.clients.length > 0 && (
-              <div className={styles.clients}>
-                <span className={styles.clientsLabel}>
-                  Clients we&rsquo;ve worked with
-                </span>
-                <div className={styles.clientRow}>
-                  {project.clients.map((c) =>
-                    c.logo ? (
-                      <img
-                        key={c.name}
-                        className={styles.clientLogo}
-                        src={c.logo}
-                        alt={c.name}
-                        title={c.name}
-                      />
-                    ) : (
-                      <span key={c.name} className={styles.clientTag}>
-                        {c.name}
-                      </span>
-                    ),
-                  )}
-                </div>
-              </div>
-            )}
+            {!project.revenueRamp && clientsBlock}
           </div>
 
           {/* Right-hand slot: a project has either a revenue ramp (BSG) or the
-              "by the numbers" ledger (Sailor-style), never both. Prefer the ramp. */}
+              "by the numbers" ledger (Sailor-style), never both. Prefer the ramp.
+              Clients move under the ramp when present. */}
           {project.revenueRamp ? (
-            <RevenueRamp {...project.revenueRamp} />
+            <RevenueRamp {...project.revenueRamp}>{clientsBlock}</RevenueRamp>
           ) : (
             project.metrics &&
             project.metrics.length > 0 && (

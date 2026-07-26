@@ -48,8 +48,10 @@
   max-width: 168px;
 }
 
-/* Landscape frame + caption wrapper (the frame keeps its own width). */
+/* Landscape frame + caption wrapper. width:100% so the frame's own `min(100%,…)`
+   resolves against the group (not this collapsed wrapper) and stays full size. */
 .shotLand {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

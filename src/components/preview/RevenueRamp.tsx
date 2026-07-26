@@ -3,6 +3,7 @@
 // factual ($200K, 30 days); the curve is an illustrative ease, not real daily
 // data. Owns components/preview/* only. Inline SVG, tokens only, no deps.
 
+import type { ReactNode } from 'react'
 import type { RevenueRamp as RevenueRampData } from '../../data/types'
 import styles from './RevenueRamp.module.css'
 
@@ -33,7 +34,12 @@ function buildPaths() {
   return { line, area, end: pts[N] }
 }
 
-export function RevenueRamp({ endLabel, spanLabel, stats }: RevenueRampData) {
+export function RevenueRamp({
+  endLabel,
+  spanLabel,
+  stats,
+  children,
+}: RevenueRampData & { children?: ReactNode }) {
   const { line, area, end } = buildPaths()
   // Axis end day, read from the span label (e.g. "first 60 days" → "day 60").
   const endDay = spanLabel.match(/\d+/)?.[0] ?? ''
@@ -90,6 +96,8 @@ export function RevenueRamp({ endLabel, spanLabel, stats }: RevenueRampData) {
           ))}
         </div>
       )}
+
+      {children}
     </aside>
   )
 }

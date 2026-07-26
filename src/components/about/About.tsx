@@ -12,7 +12,6 @@ export function About() {
         {siteConfig.name}
         <span className={styles.period}>.</span>
       </h1>
-      <p className={styles.role}>{siteConfig.role}</p>
       <p className={styles.bio}>{siteConfig.bio}</p>
 
       <p className={styles.building}>

@@ -24,6 +24,27 @@ const LEVEL_CLASS = [
   styles.level4,
 ] as const
 
+const MONTHS = [
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+]
+
+// 'YYYY-MM-DD' -> 'Jul 3' (no Date parsing, so no timezone surprises).
+function fmtDate(iso: string): string {
+  const [, m, d] = iso.split('-')
+  return `${MONTHS[Number(m) - 1] ?? ''} ${Number(d)}`
+}
+
 export function GithubTracker() {
   const user = siteConfig.githubUser
   const [status, setStatus] = useState<Status>('loading')
@@ -108,6 +129,9 @@ export function GithubTracker() {
           <div
             key={c.date}
             className={`${styles.cell} ${LEVEL_CLASS[c.level]}`}
+            data-tip={`${c.count} ${
+              c.count === 1 ? 'contribution' : 'contributions'
+            } · ${fmtDate(c.date)}`}
           />
         ))}
       </div>
