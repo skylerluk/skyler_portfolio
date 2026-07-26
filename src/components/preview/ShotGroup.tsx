@@ -50,6 +50,16 @@ export function ShotGroup({
               <span className={styles.shotCaption}>{shot.caption}</span>
             )}
           </div>
+        ) : shot?.caption ? (
+          <div className={styles.shotLand} key={i}>
+            <BrowserFrame
+              theme={theme}
+              shot={shot}
+              label={label}
+              aspect={shot?.aspect}
+            />
+            <span className={styles.shotCaption}>{shot.caption}</span>
+          </div>
         ) : (
           <BrowserFrame
             key={i}

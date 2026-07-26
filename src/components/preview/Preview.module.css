@@ -236,6 +236,16 @@ a.stage:focus-visible {
   opacity: 0.75;
 }
 
+/* Client shown as a text tag (no logo). */
+.clientTag {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  color: var(--ink-2);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-sm);
+  padding: 3px 10px;
+}
+
 /* Caption + ledger sit side by side; the ledger uses the free space on the
    right and aligns to the bottom of the caption. */
 .captionRow {
@@ -244,6 +254,15 @@ a.stage:focus-visible {
   align-items: flex-end;
   justify-content: space-between;
   gap: var(--space-6);
+}
+
+/* With a revenue ramp, top-align so the project title lines up with the ramp's
+   emphasized value ($200K+), and widen the row so the chart sits further right
+   with more room for the text/bullets. */
+.captionRowTop {
+  align-items: flex-start;
+  width: min(100%, 940px);
+  gap: var(--space-8);
 }
 
 .captionRow .caption {
@@ -299,5 +318,16 @@ a.stage:focus-visible {
 @media (max-width: 860px) {
   .preview {
     padding: var(--space-5);
+  }
+
+  /* Stack: the right-hand slot (ramp/ledger) drops full-width beneath the
+     caption, centered. */
+  .captionRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ledger {
+    align-self: center;
   }
 }

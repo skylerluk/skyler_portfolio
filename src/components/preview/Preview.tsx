@@ -6,6 +6,7 @@
 import type { ReactNode } from 'react'
 import { usePortfolio } from '../../app/PortfolioProvider'
 import { ShotGroup } from './ShotGroup'
+import { RevenueRamp } from './RevenueRamp'
 import { useHashSync, useNeighborPreload } from './usePreviewSync'
 import type { ProjectLink } from '../../data/types'
 import styles from './Preview.module.css'
@@ -42,6 +43,32 @@ export function Preview() {
   const project = projects[activeIndex]
   if (!project) return null
 
+  // Clients render in the caption normally, but move under the revenue ramp when
+  // one is present (keeps the left column for text + bullets).
+  const clientsBlock =
+    project.clients && project.clients.length > 0 ? (
+      <div className={styles.clients}>
+        <span className={styles.clientsLabel}>Clients we&rsquo;ve worked with</span>
+        <div className={styles.clientRow}>
+          {project.clients.map((c) =>
+            c.logo ? (
+              <img
+                key={c.name}
+                className={styles.clientLogo}
+                src={c.logo}
+                alt={c.name}
+                title={c.name}
+              />
+            ) : (
+              <span key={c.name} className={styles.clientTag}>
+                {c.name}
+              </span>
+            ),
+          )}
+        </div>
+      </div>
+    ) : null
+
   return (
     <section
       className={styles.preview}
@@ -75,7 +102,11 @@ export function Preview() {
           )
         })()}
 
-        <div className={styles.captionRow}>
+        <div
+          className={`${styles.captionRow} ${
+            project.revenueRamp ? styles.captionRowTop : ''
+          }`}
+        >
           <div className={styles.caption}>
             <div className={styles.metaRow}>
               <span className={styles.index}>{project.index}</span>
@@ -123,37 +154,26 @@ export function Preview() {
               </ul>
             )}
 
-            {project.clients && project.clients.length > 0 && (
-              <div className={styles.clients}>
-                <span className={styles.clientsLabel}>
-                  Clients we&rsquo;ve worked with
-                </span>
-                <div className={styles.clientRow}>
-                  {project.clients.map((c) => (
-                    <img
-                      key={c.name}
-                      className={styles.clientLogo}
-                      src={c.logo}
-                      alt={c.name}
-                      title={c.name}
-                    />
-                  ))}
-                </div>
-              </div>
-            )}
+            {!project.revenueRamp && clientsBlock}
           </div>
 
-          {/* Bottom-right "by the numbers" ledger — serif accented values,
-              black mono labels. Uses the free space beside the caption. */}
-          {project.metrics && project.metrics.length > 0 && (
-            <aside className={styles.ledger} aria-label="By the numbers">
-              {project.metrics.map((m) => (
-                <div key={m.label} className={styles.ledgerRow}>
-                  <span className={styles.ledgerValue}>{m.value}</span>
-                  <span className={styles.ledgerLabel}>{m.label}</span>
-                </div>
-              ))}
-            </aside>
+          {/* Right-hand slot: a project has either a revenue ramp (BSG) or the
+              "by the numbers" ledger (Sailor-style), never both. Prefer the ramp.
+              Clients move under the ramp when present. */}
+          {project.revenueRamp ? (
+            <RevenueRamp {...project.revenueRamp}>{clientsBlock}</RevenueRamp>
+          ) : (
+            project.metrics &&
+            project.metrics.length > 0 && (
+              <aside className={styles.ledger} aria-label="By the numbers">
+                {project.metrics.map((m) => (
+                  <div key={m.label} className={styles.ledgerRow}>
+                    <span className={styles.ledgerValue}>{m.value}</span>
+                    <span className={styles.ledgerLabel}>{m.label}</span>
+                  </div>
+                ))}
+              </aside>
+            )
           )}
         </div>
       </div>

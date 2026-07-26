@@ -62,12 +62,35 @@
   grid-auto-columns: 1fr;
   gap: 3px;
   width: 100%;
+  /* let cell tooltips escape the grid */
+  overflow: visible;
 }
 
 .cell {
+  position: relative;
   aspect-ratio: 1;
   border-radius: 2px;
   background: var(--panel);
+}
+
+/* Hover tooltip — count + date, in the site's mono/paper/hair language. */
+.cell:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--hair);
+  border-radius: var(--radius-sm);
+  padding: 3px 7px;
+  pointer-events: none;
+  z-index: 5;
 }
 
 .level0 {

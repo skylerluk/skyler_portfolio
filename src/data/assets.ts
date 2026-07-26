@@ -68,6 +68,7 @@ export const projectAssets: Record<string, ProjectAssets> = {
         src: '/assets/skyler-website/01.webp',
         alt: 'Skyler Luk personal site — an interactive 3D desk scene to explore',
         aspect: 1800 / 973,
+        caption: 'Click to open',
       },
     ],
   },
@@ -83,8 +84,10 @@ export const projectAssets: Record<string, ProjectAssets> = {
       },
     ],
     clients: [
-      { name: 'Amazon', logo: '/assets/bsg/Amazon-Square-Outline-Logo.png' },
-      { name: 'Sweetgreen', logo: '/assets/bsg/sweetgreen_logo.jpg' },
+      { name: 'Amazon' },
+      { name: 'Tesla' },
+      { name: 'Uber' },
+      { name: 'Rackspace' },
     ],
   },
 
@@ -118,6 +121,19 @@ export const projectAssets: Record<string, ProjectAssets> = {
         src: '/assets/karpathy-brain/01.webp',
         alt: 'Karpathy Brain — interlinked knowledge graph of notes',
         aspect: 1400 / 1395,
+      },
+    ],
+  },
+
+  // Anthology — venture studio site (SF × Dubai).
+  anthology: {
+    logo: '/assets/anthology/logo.png',
+    screenshots: [
+      {
+        src: '/assets/anthology/01.webp',
+        alt: 'Anthology — venture studio landing page (Golden Gate Bridge × Burj Khalifa)',
+        aspect: 1800 / 978,
+        caption: 'Click to open',
       },
     ],
   },
